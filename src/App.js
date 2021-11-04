@@ -1,5 +1,8 @@
 // import logo from "./logo.svg";
 import "./App.css";
+import BaiTapChonXe from "./BaiTapChonXe/BaiTapChonXe";
+import BTRenderLoop from "./BTRenderLoop/BTRenderLoop";
+import RenderWithLoop from "./RenderWithLoop/RenderWithLoop";
 // import Header from "./component/Demo/Header";
 // import HeaderRFC from "./component/Demo/HeaderRFC";
 // import BTChiaLayout from "./component/BTChiaLayout/BTChiaLayout";
@@ -7,10 +10,10 @@ import "./App.css";
 // import HomeComponent from "./component/BTLayoutComponent/HomeComponent";
 // import DataBinding from "./DataBinding/DataBinding";
 // import DataBindingRFC from "./DataBinding/DataBindingRFC";
-import HandleComponent from "./HandleEvent/HandleComponent";
-import RenderingCondition from "./RenderingCondition/RenderingCondition";
-import StateDemo from "./State/StateDemo";
-import Styling from "./Styling/Styling";
+// import HandleComponent from "./HandleEvent/HandleComponent";
+// import RenderingCondition from "./RenderingCondition/RenderingCondition";
+// import StateDemo from "./State/StateDemo";
+// import Styling from "./Styling/Styling";
 
 function App() {
 	return (
@@ -21,7 +24,10 @@ function App() {
 			{/* <HandleComponent /> */}
 			{/* <RenderingCondition /> */}
 			{/* <StateDemo /> */}
-			<Styling />
+			{/* <Styling /> */}
+			{/* <BaiTapChonXe /> */}
+			{/* <RenderWithLoop /> */}
+			<BTRenderLoop />
 		</div>
 	);
 }
