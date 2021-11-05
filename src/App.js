@@ -1,9 +1,11 @@
 // import logo from "./logo.svg";
 import "./App.css";
 import BTChonXeNangCao from "./BTChonXeNangCao/BTChonXeNangCao";
+import BTThuKinhDemo from "./BTThuKinh/BTThuKinhDemo";
 // import BaiTapChonXe from "./BaiTapChonXe/BaiTapChonXe";
 // import BTRenderLoop from "./BTRenderLoop/BTRenderLoop";
-// import BTThuKinh from "./BTThuKinh/BTThuKinh";
+import BTThuKinh from "./BTThuKinh/BTThuKinh";
+import BTChonXeNangCaoDemo from "./BTChonXeNangCao/BTChonXeNangCaoDemo";
 // import RenderWithLoop from "./RenderWithLoop/RenderWithLoop";
 // import Header from "./component/Demo/Header";
 // import HeaderRFC from "./component/Demo/HeaderRFC";
@@ -31,7 +33,9 @@ function App() {
 			{/* <RenderWithLoop /> */}
 			{/* <BTRenderLoop /> */}
 			{/* <BTThuKinh /> */}
-			<BTChonXeNangCao />
+			{/* <BTThuKinhDemo /> */}
+			{/* <BTChonXeNangCao /> */}
+			<BTChonXeNangCaoDemo />
 		</div>
 	);
 }
