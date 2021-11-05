@@ -1,8 +1,10 @@
 // import logo from "./logo.svg";
 import "./App.css";
-import BaiTapChonXe from "./BaiTapChonXe/BaiTapChonXe";
-import BTRenderLoop from "./BTRenderLoop/BTRenderLoop";
-import RenderWithLoop from "./RenderWithLoop/RenderWithLoop";
+import BTChonXeNangCao from "./BTChonXeNangCao/BTChonXeNangCao";
+// import BaiTapChonXe from "./BaiTapChonXe/BaiTapChonXe";
+// import BTRenderLoop from "./BTRenderLoop/BTRenderLoop";
+// import BTThuKinh from "./BTThuKinh/BTThuKinh";
+// import RenderWithLoop from "./RenderWithLoop/RenderWithLoop";
 // import Header from "./component/Demo/Header";
 // import HeaderRFC from "./component/Demo/HeaderRFC";
 // import BTChiaLayout from "./component/BTChiaLayout/BTChiaLayout";
@@ -27,7 +29,9 @@ function App() {
 			{/* <Styling /> */}
 			{/* <BaiTapChonXe /> */}
 			{/* <RenderWithLoop /> */}
-			<BTRenderLoop />
+			{/* <BTRenderLoop /> */}
+			{/* <BTThuKinh /> */}
+			<BTChonXeNangCao />
 		</div>
 	);
 }
