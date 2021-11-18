@@ -8,6 +8,7 @@ import ExerciseCart from "./Props/ExerciseCart/ExerciseCart";
 import BTGioHangRedux from "./GioHangRedux/BTGioHangRedux";
 import BTGameXucXac from "./BaiTapRedux/BTGameXucXac";
 import BTOanTuTi from "./BaiTapRedux/BTOanTuTi/BTOanTuTi";
+import BTBookingTicket from "./BaiTapRedux/BTBookingTicket/BTBookingTicket";
 
 export default class App extends Component {
 	render() {
@@ -60,7 +61,8 @@ export default class App extends Component {
 				{/* <ExerciseCart /> */}
 				{/* <BTGioHangRedux /> */}
 				{/* <BTGameXucXac /> */}
-				<BTOanTuTi />
+				{/* <BTOanTuTi /> */}
+				<BTBookingTicket />
 			</div>
 		);
 	}
