@@ -1,0 +1,33 @@
+[{
+        "id": 1,
+        "name": "Trương Gia Nghê",
+        "age": "...",
+        "img": "https://www.elle.vn/wp-content/uploads/2018/08/13/Tr%C6%B0%C6%A1ng-Gia-Ngh%C3%AA-2.jpg",
+        "like": 0,
+        "active": true
+    },
+    {
+        "id": 2,
+        "name": "Yoona",
+        "age": "...",
+        "img": "https://kenh14cdn.com/203336854389633024/2021/9/25/photo-1-16325383359121914935143.jpg",
+        "like": 0,
+        "active": true
+    },
+    {
+        "id": 3,
+        "name": "IU",
+        "age": "...",
+        "img": "https://cafebiz.cafebizcdn.vn/162123310254002176/2021/7/6/photo-1-16255568037031264821152.jpg",
+        "like": 0,
+        "active": true
+    },
+    {
+        "id": 4,
+        "name": "Suzy",
+        "age": "...",
+        "img": "https://ss-images.saostar.vn/wp700/2018/10/03/3781050/df4221ba402d78e2f226856f3f08c847.jpg",
+        "like": 0,
+        "active": true
+    }
+]

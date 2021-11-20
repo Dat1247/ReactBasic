@@ -9,6 +9,9 @@ import BTGioHangRedux from "./GioHangRedux/BTGioHangRedux";
 import BTGameXucXac from "./BaiTapRedux/BTGameXucXac";
 import BTOanTuTi from "./BaiTapRedux/BTOanTuTi/BTOanTuTi";
 import BTBookingTicket from "./BaiTapRedux/BTBookingTicket/BTBookingTicket";
+import DemoPureComponent from "./DemoPureComponent/DemoPureComponent";
+import ContextDemo from "./ContextDemo/ContextDemo";
+import ContextModelList from "./ContextDemo/BTContextModelList/ContextModelList";
 
 export default class App extends Component {
 	render() {
@@ -62,7 +65,10 @@ export default class App extends Component {
 				{/* <BTGioHangRedux /> */}
 				{/* <BTGameXucXac /> */}
 				{/* <BTOanTuTi /> */}
-				<BTBookingTicket />
+				{/* <BTBookingTicket /> */}
+				{/* <DemoPureComponent /> */}
+				{/* <ContextDemo /> */}
+				<ContextModelList />
 			</div>
 		);
 	}
