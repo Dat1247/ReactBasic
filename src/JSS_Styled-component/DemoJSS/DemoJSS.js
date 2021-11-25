@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, SmallButton } from "../Components/Button";
+import { TextField } from "../Components/TextField";
 import { StyledLink } from "./Link";
 
 export default class DemoJSS extends Component {
@@ -14,6 +15,7 @@ export default class DemoJSS extends Component {
 				</Button>
 				<SmallButton>Xin chào</SmallButton>
 				<StyledLink>abcd</StyledLink>
+				<TextField inputColor='green' />
 			</div>
 		);
 	}

@@ -9,6 +9,7 @@ export const Link = ({ className, children, ...restProps }) => (
 	<a className={className}>{children}</a>
 );
 
+//Style chỉ định nghĩa CSS cho các thẻ component cơ bản , chứ không định nghĩa nội dung cho nó
 export const StyledLink = styled(Link)`
 	color: palevioletred !important;
 	font-weight: bold;
