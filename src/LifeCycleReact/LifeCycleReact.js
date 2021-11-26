@@ -7,6 +7,7 @@ export default class LifeCycleReact extends Component {
 		super(props);
 		this.state = {
 			number: 1,
+			product: { id: 1, name: "iphone" },
 		};
 	}
 
@@ -37,11 +38,24 @@ export default class LifeCycleReact extends Component {
 					}}>
 					+
 				</button>
-				{this.state.number === 1 || this.state.number === 3 ? (
+				<button
+					className='btn btn-success'
+					onClick={() => {
+						let newProduct = { ...this.state.product };
+						newProduct.name = "Samsung";
+						this.setState({
+							product: newProduct,
+						});
+					}}>
+					Change product
+				</button>
+				<h3>Name product: {this.state.product.name}</h3>
+				{/* {this.state.number === 1 || this.state.number === 3 ? (
 					<ChildComponent />
 				) : (
 					""
-				)}
+				)} */}
+				<ChildComponent number={this.state.product} />
 			</div>
 		);
 	}

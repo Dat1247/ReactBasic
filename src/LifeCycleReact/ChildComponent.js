@@ -1,10 +1,24 @@
 import React, { Component } from "react";
+import _ from "lodash";
 
 export default class ChildComponent extends Component {
+	shouldComponentUpdate(newProps, newState) {
+		// if (newProps.number !== this.props.number) {
+		// 	return true;
+		// }
+		// if (!_.isEqual(newProps.number, this.props.number)) {
+		// 	return true;
+		// }
+		if (newProps.number.name !== this.props.number.name) {
+			return true;
+		}
+		return false;
+	}
 	render() {
 		console.log("renderChildComponent");
 		return (
 			<div>
+				<h3>New product child: {this.props.number.name}</h3>
 				<nav className='navbar navbar-expand-sm navbar-dark bg-primary'>
 					<a className='navbar-brand' href='#'>
 						Navbar

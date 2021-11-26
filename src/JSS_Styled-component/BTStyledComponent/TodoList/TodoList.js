@@ -23,12 +23,14 @@ import {
 	deleteTask,
 	doneTask,
 	editTask,
+	updateTask,
 } from "../../../redux/actions/ToDoListAction";
 import { arrTheme } from "../../Themes/ThemeManager";
 
 class TodoList extends Component {
 	state = {
 		taskName: "",
+		disabled: true,
 	};
 	renderTaskToDo = () => {
 		return this.props.taskList
@@ -41,7 +43,14 @@ class TodoList extends Component {
 							<Button
 								className='ml-1'
 								onClick={() => {
-									this.props.dispatch(editTask(task));
+									this.setState(
+										{
+											disabled: false,
+										},
+										() => {
+											this.props.dispatch(editTask(task));
+										}
+									);
 								}}>
 								<i className='fa fa-edit'></i>
 							</Button>
@@ -96,6 +105,20 @@ class TodoList extends Component {
 		});
 	};
 
+	// LifeCycle tĩnh nên không trả về con trỏ this
+	// static getDerivedStateFromProps(newProps, currenState) {
+	// 	// newProps: props mới, props cũ là this.props (không truy xuất được)
+
+	// 	// currentState: ứng với state hiện tại this.state
+
+	// 	// hoặc trả về state mới
+	// 	let newState = { ...currenState, taskName: newProps.taskEdit.taskName };
+	// 	return newState;
+
+	// 	// Trả về null -> state giữ nguyên
+	// 	// return null;
+	// }
+
 	render() {
 		return (
 			<ThemeProvider theme={this.props.themeToDoList}>
@@ -121,7 +144,7 @@ class TodoList extends Component {
 									}
 								);
 							}}
-							value={this.props.taskEdit.taskName}
+							value={this.state.taskName}
 							name='taskName'
 							label='Task name'
 							className='w-50'
@@ -145,10 +168,35 @@ class TodoList extends Component {
 							{" "}
 							<i className='fa fa-plus'></i> Add task
 						</Button>
-						<Button className='ml-2'>
-							{" "}
-							<i className='fa fa-upload'></i> Update task
-						</Button>
+						{this.state.disabled ? (
+							<Button
+								disabled
+								className='ml-2'
+								onClick={() => {
+									this.props.dispatch(updateTask(this.state.taskName));
+								}}>
+								{" "}
+								<i className='fa fa-upload'></i> Update task
+							</Button>
+						) : (
+							<Button
+								className='ml-2'
+								onClick={() => {
+									let { taskName } = this.state;
+									this.setState(
+										{
+											disabled: true,
+											taskName: "",
+										},
+										() => {
+											this.props.dispatch(updateTask(taskName));
+										}
+									);
+								}}>
+								{" "}
+								<i className='fa fa-upload'></i> Update task
+							</Button>
+						)}
 
 						<hr />
 
@@ -164,6 +212,16 @@ class TodoList extends Component {
 				</div>
 			</ThemeProvider>
 		);
+	}
+
+	// Đây là lifecycle trả về props cũ và state cũ của component trước khi render (lifecycle này chạy sau render)
+	componentDidUpdate(prevProps, prevState) {
+		//So sánh nếu như props trước đó (taskEdit trước mà khác taskEdit hiện tại thì mình mới setState)
+		if (prevProps.taskEdit.id !== this.props.taskEdit.id) {
+			this.setState({
+				taskName: this.props.taskEdit.taskName,
+			});
+		}
 	}
 }
 

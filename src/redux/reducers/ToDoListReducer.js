@@ -5,18 +5,19 @@ import {
 	delete_task,
 	done_task,
 	edit_task,
+	update_task,
 } from "../types/ToDoListType";
 import { arrTheme } from "../../JSS_Styled-component/Themes/ThemeManager";
 
 const initialState = {
 	themeToDoList: ToDoListDarkTheme,
 	taskList: [
-		{ id: "task-1", taskName: "task 1", done: true },
+		{ id: "task-1", taskName: "task 1", done: false },
 		{ id: "task-2", taskName: "task 2", done: false },
-		{ id: "task-3", taskName: "task 3", done: true },
+		{ id: "task-3", taskName: "task 3", done: false },
 		{ id: "task-4", taskName: "task 4", done: false },
 	],
-	taskEdit: { id: "task-4", taskName: "task 4", done: false },
+	taskEdit: { id: "-1", taskName: "", done: false },
 };
 
 const ToDoListReducer = (state = initialState, action) => {
@@ -73,8 +74,23 @@ const ToDoListReducer = (state = initialState, action) => {
 			// return {...state, taskList: state.taskList.filter(task => task.id !== action.taskId)}
 		}
 		case edit_task: {
-			console.log(action);
+			// console.log(action);
 			return { ...state, taskEdit: action.task };
+		}
+		case update_task: {
+			state.taskEdit = { ...state.taskEdit, taskName: action.taskName };
+			console.log(state.taskEdit);
+			let taskListUpdate = [...state.taskList];
+			let index = taskListUpdate.findIndex(
+				(task) => task.id === state.taskEdit.id
+			);
+			console.log(index);
+			if (index !== -1) {
+				taskListUpdate[index] = state.taskEdit;
+			}
+			state.taskList = taskListUpdate;
+			state.taskEdit = { id: "-1", taskName: "", done: false };
+			return { ...state };
 		}
 		default:
 			return { ...state };
