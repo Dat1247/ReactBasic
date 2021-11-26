@@ -1,5 +1,6 @@
 import "./App.css";
 import TodoList from "./JSS_Styled-component/BTStyledComponent/TodoList/TodoList";
+import LifeCycleReact from "./LifeCycleReact/LifeCycleReact";
 // import UserProfile from "./Form_Validation/UserProfile/UserProfile";
 // import DemoJSS from "./JSS_Styled-component/DemoJSS/DemoJSS";
 // import DemoTheme from "./JSS_Styled-component/Themes/DemoTheme";
@@ -10,7 +11,8 @@ function App() {
 			{/* <UserProfile /> */}
 			{/* <DemoJSS /> */}
 			{/* <DemoTheme /> */}
-			<TodoList />
+			{/* <TodoList /> */}
+			<LifeCycleReact />
 		</div>
 	);
 }
