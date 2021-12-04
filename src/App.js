@@ -1,13 +1,17 @@
 import "./App.css";
 import ContextProvider from "./Hooks/Context/ContextProvider";
-import DemoHookUseCallback from "./Hooks/DemoHookUseCallback";
-import DemoHookUseContext from "./Hooks/DemoHookUseContext";
-import DemoHookUseMemo from "./Hooks/DemoHookUseMemo";
-import DemoHookUseReducer from "./Hooks/DemoHookUseReducer";
-import DemoHookUseState from "./Hooks/DemoHookUseState";
-import DemoReduxApp from "./Hooks/DemoReduxApp";
-import DemoUseEffect from "./Hooks/DemoUseEffect";
-import DemoUseRef from "./Hooks/DemoUseRef";
+// import DemoHookUseCallback from "./Hooks/DemoHooks/DemoHookUseCallback";
+// import DemoHookUseContext from "./Hooks/DemoHooks/DemoHookUseContext";
+// import DemoHookUseMemo from "./Hooks/DemoHooks/DemoHookUseMemo";
+// import DemoHookUseReducer from "./Hooks/DemoHooks/DemoHookUseReducer";
+// import DemoHookUseState from "./Hooks/DemoHooks/DemoHookUseState";
+// import DemoReduxApp from "./Hooks/DemoHooks/DemoReduxApp";
+// import DemoUseEffect from "./Hooks/DemoHooks/DemoUseEffect";
+// import DemoUseRef from "./Hooks/DemoHooks/DemoUseRef";
+import DemoUseSpring from "./Hooks/ReactSpring/DemoUseSpring";
+import Ex2UseSpring from "./Hooks/ReactSpring/Ex2UseSpring";
+import Ex3UseSprings from "./Hooks/ReactSpring/Ex3UseSprings";
+import Ex4UseTrail from "./Hooks/ReactSpring/Ex4UseTrail";
 // import TodoList from "./JSS_Styled-component/BTStyledComponent/TodoList/TodoList";
 // import LifeCycleReact from "./LifeCycleReact/LifeCycleReact";
 // import UserProfile from "./Form_Validation/UserProfile/UserProfile";
@@ -29,7 +33,11 @@ function App() {
 			{/* <DemoUseRef /> */}
 			{/* <DemoHookUseReducer />? */}
 			{/* <DemoHookUseContext /> */}
-			<DemoReduxApp />
+			{/* <DemoReduxApp /> */}
+			{/* <DemoUseSpring /> */}
+			{/* <Ex2UseSpring /> */}
+			{/* <Ex3UseSprings /> */}
+			<Ex4UseTrail />
 		</ContextProvider>
 	);
 }
