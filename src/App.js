@@ -1,4 +1,5 @@
 import "./App.css";
+import BTGameBauCua from "./BaiTapTongHop/BTGameBauCua/BTGameBauCua";
 import ContextProvider from "./Hooks/Context/ContextProvider";
 // import DemoHookUseCallback from "./Hooks/DemoHooks/DemoHookUseCallback";
 // import DemoHookUseContext from "./Hooks/DemoHooks/DemoHookUseContext";
@@ -41,7 +42,8 @@ function App() {
 			{/* <Ex3UseSprings /> */}
 			{/* <Ex4UseTrail /> */}
 			{/* <Ex5UseTransition /> */}
-			<Ex6UseChain />
+			{/* <Ex6UseChain /> */}
+			<BTGameBauCua />
 		</ContextProvider>
 	);
 }
