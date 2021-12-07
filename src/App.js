@@ -12,6 +12,8 @@ import DemoUseSpring from "./Hooks/ReactSpring/DemoUseSpring";
 import Ex2UseSpring from "./Hooks/ReactSpring/Ex2UseSpring";
 import Ex3UseSprings from "./Hooks/ReactSpring/Ex3UseSprings";
 import Ex4UseTrail from "./Hooks/ReactSpring/Ex4UseTrail";
+import Ex5UseTransition from "./Hooks/ReactSpring/Ex5UseTransition";
+import Ex6UseChain from "./Hooks/ReactSpring/Ex6UseChain";
 // import TodoList from "./JSS_Styled-component/BTStyledComponent/TodoList/TodoList";
 // import LifeCycleReact from "./LifeCycleReact/LifeCycleReact";
 // import UserProfile from "./Form_Validation/UserProfile/UserProfile";
@@ -37,7 +39,9 @@ function App() {
 			{/* <DemoUseSpring /> */}
 			{/* <Ex2UseSpring /> */}
 			{/* <Ex3UseSprings /> */}
-			<Ex4UseTrail />
+			{/* <Ex4UseTrail /> */}
+			{/* <Ex5UseTransition /> */}
+			<Ex6UseChain />
 		</ContextProvider>
 	);
 }
