@@ -2,3 +2,8 @@
     background-color: #fff;
     color: #343a40 !important;
 }
+
+.dropdown-menu {
+    background-color: #343a40;
+    color: #fff;
+}
