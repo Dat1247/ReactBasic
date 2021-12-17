@@ -80,6 +80,12 @@ export default function Header() {
 								to='/todolistrfc'>
 								To do list RFC
 							</NavLink>
+							<NavLink
+								activeClassName='activeNavItem'
+								className='nav-link'
+								to='/todolistredux'>
+								To do list redux
+							</NavLink>
 						</div>
 					</li>
 				</ul>

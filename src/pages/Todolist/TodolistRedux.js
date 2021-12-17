@@ -1,9 +1,19 @@
-import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+	addTaskAPI,
+	checkTaskAPI,
+	deleteTaskAPI,
+	getTaskAPI,
+	rejectTaskAPI,
+} from "../../redux/actions/ToDoListAction";
+import { GET_TASK_API } from "../../redux/constants/ToDoListConstant";
 
-export default function TodolistRFC(props) {
+export default function TodolistRedux(props) {
+	const taskList = useSelector((state) => state.ToDoListReducer.taskList);
+	const dispatch = useDispatch();
 	let [state, setState] = useState({
-		taskList: [],
 		values: {
 			taskName: "",
 		},
@@ -34,81 +44,24 @@ export default function TodolistRFC(props) {
 
 	const addTask = (e) => {
 		e.preventDefault();
-		let promise = Axios({
-			url: "http://svcy.myclass.vn/api/ToDoList/AddTask",
-			method: "POST",
-			data: { taskName: state.values.taskName },
-		});
-		promise
-			.then((result) => {
-				// console.log(result);
-				getTaskList();
-			})
-			.catch((err) => {
-				alert(err.response.data);
-			});
+
+		dispatch(addTaskAPI(state.values.taskName));
 	};
 
 	const getTaskList = () => {
-		let promise = Axios({
-			url: "http://svcy.myclass.vn/api/ToDoList/GetAllTask",
-			method: "GET",
-		});
-		promise
-			.then((result) => {
-				// console.log(result.data);
-				setState({
-					...state,
-					taskList: result.data,
-				});
-			})
-			.catch((err) => console.log(err.response.data));
-		// promise.catch();
+		dispatch(getTaskAPI());
 	};
 
 	const checkTask = (taskName) => {
-		let promise = Axios({
-			url: `http://svcy.myclass.vn/api/ToDoList/doneTask?taskName=${taskName}`,
-			method: "PUT",
-		});
-		promise
-			.then((res) => {
-				alert(res.data);
-				getTaskList();
-			})
-			.catch((err) => {
-				alert(err.response.data);
-			});
+		dispatch(checkTaskAPI(taskName));
 	};
 
 	const rejectTask = (taskName) => {
-		let promise = Axios({
-			url: `http://svcy.myclass.vn/api/ToDoList/rejectTask?taskName=${taskName}`,
-			method: "PUT",
-		});
-		promise
-			.then((res) => {
-				alert(res.data);
-				getTaskList();
-			})
-			.catch((err) => {
-				alert(err.response.data);
-			});
+		dispatch(rejectTaskAPI(taskName));
 	};
 
 	const delTask = (taskName) => {
-		let promise = Axios({
-			url: `http://svcy.myclass.vn/api/ToDoList/deleteTask?taskName=${taskName}`,
-			method: "DELETE",
-		});
-		promise
-			.then((result) => {
-				alert(result.data);
-				getTaskList();
-			})
-			.catch((error) => {
-				console.log(error.response.data);
-			});
+		dispatch(deleteTaskAPI(taskName));
 	};
 
 	useEffect(() => {
@@ -119,7 +72,7 @@ export default function TodolistRFC(props) {
 	}, []);
 
 	const renderTaskToDo = () => {
-		return state.taskList
+		return taskList
 			.filter((item) => !item.status)
 			.map((item, index) => {
 				return (
@@ -150,7 +103,7 @@ export default function TodolistRFC(props) {
 	};
 
 	const renderTaskToDoDone = () => {
-		return state.taskList
+		return taskList
 			.filter((item) => item.status)
 			.map((item, index) => {
 				return (
