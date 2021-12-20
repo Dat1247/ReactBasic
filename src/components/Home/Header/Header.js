@@ -86,6 +86,12 @@ export default function Header() {
 								to='/todolistredux'>
 								To do list redux
 							</NavLink>
+							<NavLink
+								activeClassName='activeNavItem'
+								className='nav-link'
+								to='/todolistsaga'>
+								To do list redux-saga
+							</NavLink>
 						</div>
 					</li>
 				</ul>

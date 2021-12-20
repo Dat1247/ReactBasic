@@ -1,7 +1,9 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
+import LoadingComponent from "./components/GlobalSetting/LoadingComponent/LoadingComponent";
 import Header from "./components/Home/Header/Header";
 import About from "./pages/About/About";
+import BaiTapToDoListSaga from "./pages/BaiTapToDoListSaga/BaiTapToDoListSaga";
 import Contact from "./pages/Contact/Contact";
 import Detail from "./pages/Detail/Detail";
 import Home from "./pages/Home/Home";
@@ -16,6 +18,7 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Header />
+			<LoadingComponent />
 			<Switch>
 				<Route exact path='/home' component={Home} />
 				<Route exact path='/contact' component={Contact} />
@@ -26,6 +29,7 @@ function App() {
 				<Route exact path='/todolistrfc' component={TodolistRFC} />
 				<Route exact path='/todolistrcc' component={Todolist} />
 				<Route exact path='/todolistredux' component={TodolistRedux} />
+				<Route exact path='/todolistsaga' component={BaiTapToDoListSaga} />
 
 				<Route exact path='/' component={Home} />
 				<Route path='*' component={PageNotFound} />
