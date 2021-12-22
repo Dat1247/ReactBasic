@@ -94,6 +94,14 @@ export default function Header() {
 							</NavLink>
 						</div>
 					</li>
+					<li className='nav-item'>
+						<NavLink
+							activeClassName='activeNavItem'
+							className='nav-link'
+							to='/demohocmodal'>
+							Demo HOC Modal
+						</NavLink>
+					</li>
 				</ul>
 				<form className='form-inline my-2 my-lg-0'>
 					<input
