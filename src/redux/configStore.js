@@ -3,6 +3,8 @@ import { ToDoListReducer } from "./reducers/ToDoListReducer";
 import LoadingReducer from "./reducers/LoadingReducer";
 import { ModalReducer } from "./reducers/ModalReducer";
 import reduxThunk from "redux-thunk";
+import { HistoryReducer } from "./reducers/HIstoryReducer";
+import { UserLoginCyberBugsReducer } from "./reducers/UserCyberBugsReducer";
 
 //Middleware Saga
 import createMiddlewareSaga from "redux-saga";
@@ -15,6 +17,8 @@ const rootReducer = combineReducers({
 	ToDoListReducer,
 	LoadingReducer,
 	ModalReducer,
+	HistoryReducer,
+	UserLoginCyberBugsReducer,
 });
 
 const store = createStore(

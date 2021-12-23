@@ -1,6 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function Home(props) {
 	console.log(props);
-	return <div>Trang chủ</div>;
+	const userLogin = useSelector(
+		(state) => state.UserLoginCyberBugsReducer.userLogin
+	);
+	return (
+		<div>
+			{userLogin.name}
+			<img src={userLogin.avatar} alt={userLogin.name} />
+		</div>
+	);
 }

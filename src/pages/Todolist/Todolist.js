@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
-import "./Todolist.css";
+// import "./Todolist.css";
 
 export default class Todolist extends Component {
 	state = {

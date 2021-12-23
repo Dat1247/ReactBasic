@@ -1,6 +1,7 @@
 import Axios from "axios";
 import { all } from "redux-saga/effects";
 import * as ToDoListSaga from "./ToDoListSaga";
+import * as Cyberbugs from "./CyberBugs/UserCyberBugsSaga";
 
 export function* rootSaga() {
 	// yield fork(getTaskAPI);
@@ -13,5 +14,8 @@ export function* rootSaga() {
 		ToDoListSaga.theoDoiActionDeleteTaskAPI(),
 		ToDoListSaga.theoDoiActionDoneTaskAPI(),
 		ToDoListSaga.theoDoiActionRejectTaskAPI(),
+
+		//CyberBugs
+		Cyberbugs.theoDoiSignin(),
 	]);
 }
