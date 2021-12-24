@@ -2,6 +2,8 @@ import Axios from "axios";
 import { all } from "redux-saga/effects";
 import * as ToDoListSaga from "./ToDoListSaga";
 import * as Cyberbugs from "./CyberBugs/UserCyberBugsSaga";
+import * as ProjectCategorySaga from "./CyberBugs/ProjectCategorySaga";
+import * as ProjectSaga from "./CyberBugs/ProjectSaga";
 
 export function* rootSaga() {
 	// yield fork(getTaskAPI);
@@ -17,5 +19,7 @@ export function* rootSaga() {
 
 		//CyberBugs
 		Cyberbugs.theoDoiSignin(),
+		ProjectCategorySaga.theoDoigetAllProjetCategory(),
+		ProjectSaga.theoDoiCreateProjectSaga(),
 	]);
 }
