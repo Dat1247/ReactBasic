@@ -1,12 +1,8 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
-import CotentMain from "../../components/CyberBugs/MainCyberBugs/CotentMain";
-import HeaderMain from "../../components/CyberBugs/MainCyberBugs/HeaderMain";
-import InfoMain from "../../components/CyberBugs/MainCyberBugs/InfoMain";
 import MenuCyberBugs from "../../components/CyberBugs/MenuCyberBugs";
 import ModalCyberBugs from "../../components/CyberBugs/ModalCyberBugs/ModalCyberBugs";
 import SibebarCyberBugs from "../../components/CyberBugs/SibebarCyberBugs";
-import Header from "../../components/Home/Header/Header";
 
 export default function CyberBugsTemplate(props) {
 	const { Component, ...restParam } = props;

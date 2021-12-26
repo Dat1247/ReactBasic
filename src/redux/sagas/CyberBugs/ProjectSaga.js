@@ -1,10 +1,7 @@
 import { call, delay, put, select, takeLatest } from "redux-saga/effects";
 import { cyberbugsService } from "../../../services/CyberBugsService";
 import { STATUS_CODE } from "../../../util/constants/settingSystem";
-import {
-	GET_ALL_PROJECT_CATEGORY,
-	GET_ALL_PROJECT_CATEGORY_SAGA,
-} from "../../constants/CyberBugs/CyberBugsConstants";
+
 import {
 	DISPLAY_LOADING,
 	HIDE_LOADING,
@@ -23,7 +20,7 @@ function* createProjectSaga(action) {
 
 		if (status === STATUS_CODE.SUCCESS) {
 			//Gọi api thành công sẽ dispatch lên reducer thông qua put()
-            console.log(data)
+			console.log(data);
 		}
 	} catch (err) {
 		console.log(err.response.data);

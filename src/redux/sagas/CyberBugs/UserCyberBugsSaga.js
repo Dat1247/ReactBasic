@@ -14,7 +14,7 @@ import {
 
 function* signinSaga(action) {
 	const { userLogin } = action;
-	// console.log(action);
+	console.log(action);
 	yield put({
 		type: DISPLAY_LOADING,
 	});
@@ -33,6 +33,7 @@ function* signinSaga(action) {
 			userLogin: data.content,
 		});
 
+		//Chuyển trang sau khi đã đăng nhập thành công
 		let history = yield select((state) => state.HistoryReducer.history);
 		// console.log(history);
 		history.push("/home");
