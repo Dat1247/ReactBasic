@@ -6,6 +6,7 @@ import reduxThunk from "redux-thunk";
 import { HistoryReducer } from "./reducers/HIstoryReducer";
 import { UserLoginCyberBugsReducer } from "./reducers/UserCyberBugsReducer";
 import { ProjectCyberbugsReducer } from "./reducers/ProjectCyberbugsReducer";
+import { ProjectListCyberbugsReducer } from "./reducers/ProjectListCyberbugsReducer";
 
 //Middleware Saga
 import createMiddlewareSaga from "redux-saga";
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
 	HistoryReducer,
 	UserLoginCyberBugsReducer,
 	ProjectCyberbugsReducer,
+	ProjectListCyberbugsReducer,
 });
 
 const store = createStore(

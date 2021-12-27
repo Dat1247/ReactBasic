@@ -25,6 +25,8 @@ import CyberBugsTemplate from "./templates/HomeTemplate/CyberBugsTemplate";
 import indexCyberBugs from "./redux/sagas/CyberBugs/indexCyberBugs";
 import CreateProject from "./pages/CyberBugs/CreateProject/CreateProject";
 
+import ProjectManagement from "./pages/CyberBugs/ProjectManagement/ProjectManagement";
+
 function App() {
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -86,6 +88,11 @@ function App() {
 					exact
 					path='/createproject'
 					Component={CreateProject}
+				/>
+				<CyberBugsTemplate
+					exact
+					path='/projectmanagement'
+					Component={ProjectManagement}
 				/>
 
 				<HomeTemplate exact path='/' Component={Home} />

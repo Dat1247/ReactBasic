@@ -3,7 +3,10 @@ import { Editor } from "@tinymce/tinymce-react";
 import { withFormik } from "formik";
 import * as Yup from "yup";
 import { connect, useSelector, useDispatch } from "react-redux";
-import { GET_ALL_PROJECT_CATEGORY_SAGA } from "../../../redux/constants/CyberBugs/CyberBugsConstants";
+import {
+	CREATE_PROJECT_SAGA,
+	GET_ALL_PROJECT_CATEGORY_SAGA,
+} from "../../../redux/constants/CyberBugs/CyberBugsConstants";
 
 function CreateProject(props) {
 	const arrProjectCategory = useSelector(
@@ -104,7 +107,7 @@ const createProjectForm = withFormik({
 		// console.log("props", props);
 		console.log("value", value);
 		props.dispatch({
-			type: "CREATE_PROJECT_SAGA",
+			type: CREATE_PROJECT_SAGA,
 			newProject: value,
 		});
 	},

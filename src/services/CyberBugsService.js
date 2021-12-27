@@ -34,6 +34,15 @@ export class CyberbugsService {
 			headers: { Authorization: "Bearer " + localStorage.getItem(TOKEN) },
 		});
 	};
+
+	getListProject = () => {
+		return Axios({
+			url: `${DOMAIN_CYBERBUG}/Project/getAllProject`,
+			method: "GET",
+			//Token yêu càu từ back-end chứng minh user đã đăng nhập
+			headers: { Authorization: "Bearer " + localStorage.getItem(TOKEN) },
+		});
+	};
 }
 
 export const cyberbugsService = new CyberbugsService();
