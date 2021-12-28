@@ -4,6 +4,7 @@ import ReactHtmlParser from "react-html-parser";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { GET_LIST_PROJECT_SAGA } from "../../../redux/constants/CyberBugs/CyberBugsConstants";
+import FormEditProject from "../../../components/Forms/FormEditProject/FormEditProject";
 
 export default function ProjectManagement(props) {
 	const projectList = useSelector(
@@ -143,7 +144,24 @@ export default function ProjectManagement(props) {
 			key: "action",
 			render: (text, record, index) => (
 				<Space size='middle'>
-					<Button type='primary' onClick={() => {}}>
+					<Button
+						type='primary'
+						onClick={() => {
+							const action = {
+								type: "OPEN_FORM_EDIT_PROJECT",
+								Component: <FormEditProject />,
+							};
+
+							//dispatch lên reducer
+							dispatch(action);
+
+							//dispatch dữ liệu dòng hiện tại lên reducer
+							const actionEditProject = {
+								type: "EDIT_PROJECT",
+								projectEditModal: record,
+							};
+							dispatch(actionEditProject);
+						}}>
 						<EditOutlined />
 					</Button>
 					<Button type='primary' danger>

@@ -65,3 +65,27 @@ function* getListProjectSaga(action) {
 export function* theoDoiGetListProjectSaga() {
 	yield takeLatest(GET_LIST_PROJECT_SAGA, getListProjectSaga);
 }
+
+//---------------UPDATE PROJECT --------------------
+function* updateProjectSaga(action) {
+	try {
+		const { data, status } = yield call(() =>
+			cyberbugsService.updateProject(action.projectUpdate)
+		);
+
+		if (status === STATUS_CODE.SUCCESS) {
+			console.log(data);
+		}
+		// yield put({
+		// 	type: GET_LIST_PROJECT_SAGA,
+		// });
+		yield call(getListProjectSaga);
+		yield put({ type: "CLOSE_DRAWER" });
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+export function* theoDoiUpdateListProjectSaga() {
+	yield takeLatest("UPDATE_LIST_PROJECT_SAGA", updateProjectSaga);
+}

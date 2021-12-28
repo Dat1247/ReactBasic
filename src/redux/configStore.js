@@ -7,10 +7,12 @@ import { HistoryReducer } from "./reducers/HIstoryReducer";
 import { UserLoginCyberBugsReducer } from "./reducers/UserCyberBugsReducer";
 import { ProjectCyberbugsReducer } from "./reducers/ProjectCyberbugsReducer";
 import { ProjectListCyberbugsReducer } from "./reducers/ProjectListCyberbugsReducer";
+import DrawerCyberbugsReducer from "./reducers/DrawerCyberbugsReducer";
 
 //Middleware Saga
 import createMiddlewareSaga from "redux-saga";
 import { rootSaga } from "./sagas/rootSaga";
+import { ProjectReducer } from "./reducers/ProjectReducer";
 
 const middlewareSaga = createMiddlewareSaga();
 
@@ -23,6 +25,8 @@ const rootReducer = combineReducers({
 	UserLoginCyberBugsReducer,
 	ProjectCyberbugsReducer,
 	ProjectListCyberbugsReducer,
+	DrawerCyberbugsReducer,
+	ProjectReducer,
 });
 
 const store = createStore(
