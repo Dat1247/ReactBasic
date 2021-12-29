@@ -18,9 +18,13 @@ export function* rootSaga() {
 
 		//CyberBugs
 		Cyberbugs.theoDoiSignin(),
+		Cyberbugs.theoDoiGetUser(),
+		Cyberbugs.theoDoiAddUserProject(),
+		Cyberbugs.theoDoiRemoveUserProject(),
 		ProjectCategorySaga.theoDoigetAllProjetCategory(),
 		ProjectSaga.theoDoiCreateProjectSaga(),
 		ProjectSaga.theoDoiGetListProjectSaga(),
 		ProjectSaga.theoDoiUpdateListProjectSaga(),
+		ProjectSaga.theoDoiDeleteProjectSaga(),
 	]);
 }

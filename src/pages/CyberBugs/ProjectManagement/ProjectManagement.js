@@ -1,7 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Table, Button, Space, Tag, Divider } from "antd";
+import React, { useState, useEffect, useRef } from "react";
+import {
+	Table,
+	Button,
+	Space,
+	Tag,
+	Divider,
+	Popconfirm,
+	message,
+	Avatar,
+	Popover,
+	AutoComplete,
+} from "antd";
 import ReactHtmlParser from "react-html-parser";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined, CloseOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { GET_LIST_PROJECT_SAGA } from "../../../redux/constants/CyberBugs/CyberBugsConstants";
 import FormEditProject from "../../../components/Forms/FormEditProject/FormEditProject";
@@ -10,6 +21,9 @@ export default function ProjectManagement(props) {
 	const projectList = useSelector(
 		(state) => state.ProjectListCyberbugsReducer.projectList
 	);
+	const { userSearch } = useSelector(
+		(state) => state.UserLoginCyberBugsReducer
+	);
 
 	const dispatch = useDispatch();
 
@@ -17,6 +31,10 @@ export default function ProjectManagement(props) {
 		filteredInfo: null,
 		sortedInfo: null,
 	});
+
+	const [valueSearch, setValueSearch] = useState("");
+
+	const searchRef = useRef(null);
 
 	useEffect(() => {
 		dispatch({
@@ -138,7 +156,132 @@ export default function ProjectManagement(props) {
 				return 1;
 			},
 		},
+		{
+			title: "members",
+			key: "members",
+			render: (text, record, index) => {
+				return (
+					<div>
+						{record.members?.slice(0, 3).map((item, index) => {
+							return (
+								<Popover
+									key={index}
+									placement='top'
+									title={"member"}
+									content={() => {
+										return (
+											<table className='table'>
+												<thead>
+													<tr>
+														<th>Id</th>
+														<th>Avatar</th>
+														<th>Name</th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody>
+													{record.members?.map((item, index) => {
+														return (
+															<tr key={index}>
+																<td>{item.userId}</td>
+																<td>
+																	<img
+																		src={item.avatar}
+																		width='25'
+																		height='25'
+																		style={{ borderRadius: "50%" }}
+																		alt={item.name}
+																	/>
+																</td>
+																<td>{item.name}</td>
+																<td>
+																	<Button
+																		type='primary'
+																		danger
+																		shape='circle'
+																		icon={<CloseOutlined />}
+																		onClick={() => {
+																			dispatch({
+																				type: "REMOVE_USER_PROJECT_API",
+																				userProject: {
+																					userId: item.userId,
+																					projectId: record.id,
+																				},
+																			});
+																		}}
+																	/>
+																</td>
+															</tr>
+														);
+													})}
+												</tbody>
+											</table>
+										);
+									}}>
+									<Avatar src={item.avatar} />
+								</Popover>
+							);
+						})}
+						{record.members.length > 3 ? <Avatar>...</Avatar> : ""}
+						<Popover
+							placement='bottom'
+							title={"Add user"}
+							content={() => {
+								return (
+									<AutoComplete
+										style={{ width: "100%" }}
+										onSearch={(value) => {
+											if (searchRef.current) {
+												clearTimeout(searchRef.current);
+											}
+											searchRef.current = setTimeout(() => {
+												dispatch({
+													type: "GET_USER_API",
+													keyWord: value,
+												});
+											}, 300);
+										}}
+										options={userSearch?.map((item, index) => {
+											return {
+												label: item.name,
+												value: item.userId.toString(),
+											};
+										})}
+										onChange={(text) => {
+											setValueSearch(text);
+										}}
+										value={valueSearch}
+										onSelect={(valueSelect, option) => {
+											//Set gia tri hop thoai = option.label
+											setValueSearch(option.label);
 
+											//Goi api gui ve back-end
+											dispatch({
+												type: "ADD_USER_PROJECT_API",
+												userProject: {
+													projectId: record.id,
+													userId: valueSelect,
+												},
+											});
+										}}
+									/>
+								);
+							}}
+							trigger='click'>
+							<Button shape='circle'>+</Button>
+						</Popover>
+					</div>
+				);
+			},
+			sorter: (item2, item1) => {
+				let creator1 = item1.creator.name.trim().toLowerCase();
+				let creator2 = item2.creator.name.trim().toLowerCase();
+				if (creator2 < creator1) {
+					return -1;
+				}
+				return 1;
+			},
+		},
 		{
 			title: "Action",
 			key: "action",
@@ -161,12 +304,20 @@ export default function ProjectManagement(props) {
 								projectEditModal: record,
 							};
 							dispatch(actionEditProject);
-						}}>
-						<EditOutlined />
-					</Button>
-					<Button type='primary' danger>
-						<DeleteOutlined />
-					</Button>
+						}}
+						icon={<EditOutlined />}
+					/>
+
+					<Popconfirm
+						title='Are you sure to delete this project?'
+						onConfirm={() => {
+							dispatch({ type: "DELETE_PROJECT_SAGA", idProject: record.id });
+						}}
+						// onCancel={cancel}
+						okText='Yes'
+						cancelText='No'>
+						<Button type='primary' danger icon={<DeleteOutlined />} />
+					</Popconfirm>
 				</Space>
 			),
 		},

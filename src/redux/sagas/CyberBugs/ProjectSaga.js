@@ -11,6 +11,8 @@ import {
 	HIDE_LOADING,
 } from "../../constants/LoadingConstants";
 import { history } from "../../../util/libs/history";
+import { projectService } from "../../../services/ProjectService";
+import { notifyFunction } from "../../../util/Notification/NotificationCyberbugs";
 
 function* createProjectSaga(action) {
 	yield put({
@@ -88,4 +90,41 @@ function* updateProjectSaga(action) {
 
 export function* theoDoiUpdateListProjectSaga() {
 	yield takeLatest("UPDATE_LIST_PROJECT_SAGA", updateProjectSaga);
+}
+
+//---------------DELETE PROJECT --------------------
+function* deleteProjectSaga(action) {
+	yield put({
+		type: DISPLAY_LOADING,
+	});
+	yield delay(1000);
+	try {
+		const { data, status } = yield call(() =>
+			// cyberbugsService.updateProject(action.projectUpdate)
+			projectService.deleteProject(action.idProject)
+		);
+
+		if (status === STATUS_CODE.SUCCESS) {
+			console.log(data);
+			notifyFunction("success", "Delete project successfully!", "");
+		} else {
+			notifyFunction("error", "Delete project fail!", "");
+		}
+		// yield put({
+		// 	type: GET_LIST_PROJECT_SAGA,
+		// });
+		yield call(getListProjectSaga);
+		yield put({ type: "CLOSE_DRAWER" });
+	} catch (err) {
+		notifyFunction("error", "Delete project fail!", "");
+		console.log(err);
+	}
+
+	yield put({
+		type: HIDE_LOADING,
+	});
+}
+
+export function* theoDoiDeleteProjectSaga() {
+	yield takeLatest("DELETE_PROJECT_SAGA", deleteProjectSaga);
 }
