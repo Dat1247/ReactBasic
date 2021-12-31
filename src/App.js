@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { BrowserRouter, Route, Router, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import LoadingComponent from "./components/GlobalSetting/LoadingComponent/LoadingComponent";
-import Header from "./components/Home/Header/Header";
-import Modal from "./HOC/Modal/Modal";
+
 import About from "./pages/About/About";
 import BaiTapToDoListSaga from "./pages/BaiTapToDoListSaga/BaiTapToDoListSaga";
 import Contact from "./pages/Contact/Contact";
@@ -12,7 +11,7 @@ import LoginCyberBugs from "./pages/CyberBugs/LoginCyberBugs/LoginCyberBugs";
 import DemoHOCModal from "./pages/DemoHOC/DemoHOCModal";
 import Detail from "./pages/Detail/Detail";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
+
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Profile from "./pages/Profile/Profile";
 import Todolist from "./pages/Todolist/Todolist";
@@ -97,7 +96,13 @@ function App() {
 					Component={ProjectManagement}
 				/>
 
-				<HomeTemplate exact path='/' Component={Home} />
+				<CyberBugsTemplate
+					exact
+					path='/projectdetail/:projectId'
+					Component={indexCyberBugs}
+				/>
+
+				<CyberBugsTemplate exact path='/' Component={ProjectManagement} />
 				<HomeTemplate path='*' Component={PageNotFound} />
 			</Switch>
 		</>

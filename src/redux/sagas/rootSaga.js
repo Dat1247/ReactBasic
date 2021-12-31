@@ -3,6 +3,10 @@ import * as ToDoListSaga from "./ToDoListSaga";
 import * as Cyberbugs from "./CyberBugs/UserCyberBugsSaga";
 import * as ProjectCategorySaga from "./CyberBugs/ProjectCategorySaga";
 import * as ProjectSaga from "./CyberBugs/ProjectSaga";
+import * as TaskTypeSaga from "./CyberBugs/TaskTypeSaga";
+import * as PrioritySaga from "./CyberBugs/PrioritySaga";
+import * as TaskSaga from "./CyberBugs/TaskSaga";
+import * as StatusSaga from "./CyberBugs/StatusSaga";
 
 export function* rootSaga() {
 	// yield fork(getTaskAPI);
@@ -21,10 +25,22 @@ export function* rootSaga() {
 		Cyberbugs.theoDoiGetUser(),
 		Cyberbugs.theoDoiAddUserProject(),
 		Cyberbugs.theoDoiRemoveUserProject(),
+		Cyberbugs.theoDoiGetUserByProjectIdSaga(),
+
 		ProjectCategorySaga.theoDoigetAllProjetCategory(),
 		ProjectSaga.theoDoiCreateProjectSaga(),
 		ProjectSaga.theoDoiGetListProjectSaga(),
 		ProjectSaga.theoDoiUpdateListProjectSaga(),
 		ProjectSaga.theoDoiDeleteProjectSaga(),
+		ProjectSaga.theoDoiGetProjectDetailSaga(),
+		ProjectSaga.theoDoiGetAllProjectSaga(),
+
+		TaskTypeSaga.theoDoiGetAllTaskTypeSaga(),
+
+		PrioritySaga.theoDoiGetAllPrioritySaga(),
+
+		TaskSaga.theoDoiCreateTaskSaga(),
+
+		StatusSaga.theoDoiGetAllStatus(),
 	]);
 }

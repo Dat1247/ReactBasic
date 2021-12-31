@@ -3,8 +3,15 @@ import { cyberbugsService } from "../../../services/CyberBugsService";
 import { STATUS_CODE } from "../../../util/constants/settingSystem";
 import {
 	CREATE_PROJECT_SAGA,
+	DELETE_PROJECT_SAGA,
+	GET_ALL_PROJECT,
+	GET_ALL_PROJECT_SAGA,
 	GET_LIST_PROJECT_SAGA,
+	GET_PROJECT_DETAIL_SAGA,
 	GET_PROJECT_LIST,
+	GET_USER_BY_PROJECT_ID_SAGA,
+	PUT_PROJECT_DETAIL,
+	UPDATE_LIST_PROJECT_SAGA,
 } from "../../constants/CyberBugs/CyberBugsConstants";
 import {
 	DISPLAY_LOADING,
@@ -78,9 +85,6 @@ function* updateProjectSaga(action) {
 		if (status === STATUS_CODE.SUCCESS) {
 			console.log(data);
 		}
-		// yield put({
-		// 	type: GET_LIST_PROJECT_SAGA,
-		// });
 		yield call(getListProjectSaga);
 		yield put({ type: "CLOSE_DRAWER" });
 	} catch (err) {
@@ -89,7 +93,7 @@ function* updateProjectSaga(action) {
 }
 
 export function* theoDoiUpdateListProjectSaga() {
-	yield takeLatest("UPDATE_LIST_PROJECT_SAGA", updateProjectSaga);
+	yield takeLatest(UPDATE_LIST_PROJECT_SAGA, updateProjectSaga);
 }
 
 //---------------DELETE PROJECT --------------------
@@ -110,9 +114,6 @@ function* deleteProjectSaga(action) {
 		} else {
 			notifyFunction("error", "Delete project fail!", "");
 		}
-		// yield put({
-		// 	type: GET_LIST_PROJECT_SAGA,
-		// });
 		yield call(getListProjectSaga);
 		yield put({ type: "CLOSE_DRAWER" });
 	} catch (err) {
@@ -126,5 +127,74 @@ function* deleteProjectSaga(action) {
 }
 
 export function* theoDoiDeleteProjectSaga() {
-	yield takeLatest("DELETE_PROJECT_SAGA", deleteProjectSaga);
+	yield takeLatest(DELETE_PROJECT_SAGA, deleteProjectSaga);
+}
+
+//---------------GET PROJECT DETAIL --------------------
+function* getProjectDetailSaga(action) {
+	yield put({
+		type: DISPLAY_LOADING,
+	});
+	yield delay(1000);
+	try {
+		const { data, status } = yield call(() =>
+			projectService.getProjectDetail(action.projectId)
+		);
+		//Lay du lieu thanh cong thi dua len redux
+		yield put({
+			type: PUT_PROJECT_DETAIL,
+			projectDetail: data.content,
+		});
+
+		if (status === STATUS_CODE.SUCCESS) {
+			console.log(data);
+		}
+	} catch (err) {
+		console.log("404 Not Found!");
+		let history = yield select((state) => state.HistoryReducer.history);
+		history.push("/projectmanagement");
+		console.log(err);
+	}
+
+	yield put({
+		type: HIDE_LOADING,
+	});
+}
+
+export function* theoDoiGetProjectDetailSaga() {
+	yield takeLatest(GET_PROJECT_DETAIL_SAGA, getProjectDetailSaga);
+}
+
+//---------------------GET ALL PROJECT --------------------
+
+function* getAllProjectSaga(action) {
+	yield put({
+		type: DISPLAY_LOADING,
+	});
+	yield delay(1000);
+	try {
+		const { data, status } = yield call(() => projectService.getAllProject());
+
+		if (status === STATUS_CODE.SUCCESS) {
+			yield put({
+				type: GET_ALL_PROJECT,
+				arrProject: data.content,
+			});
+
+			yield put({
+				type: GET_USER_BY_PROJECT_ID_SAGA,
+				projectId: data.content[0].id,
+			});
+		}
+	} catch (err) {
+		console.log(err);
+	}
+
+	yield put({
+		type: HIDE_LOADING,
+	});
+}
+
+export function* theoDoiGetAllProjectSaga() {
+	yield takeLatest(GET_ALL_PROJECT_SAGA, getAllProjectSaga);
 }

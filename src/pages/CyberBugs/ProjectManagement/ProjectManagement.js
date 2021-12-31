@@ -4,18 +4,16 @@ import {
 	Button,
 	Space,
 	Tag,
-	Divider,
 	Popconfirm,
-	message,
 	Avatar,
 	Popover,
 	AutoComplete,
 } from "antd";
-import ReactHtmlParser from "react-html-parser";
 import { EditOutlined, DeleteOutlined, CloseOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { GET_LIST_PROJECT_SAGA } from "../../../redux/constants/CyberBugs/CyberBugsConstants";
 import FormEditProject from "../../../components/Forms/FormEditProject/FormEditProject";
+import { NavLink } from "react-router-dom";
 
 export default function ProjectManagement(props) {
 	const projectList = useSelector(
@@ -96,6 +94,9 @@ export default function ProjectManagement(props) {
 			// sorter: (a, b) => a.age - b.age,
 			// sortOrder: sortedInfo.columnKey === "age" && sortedInfo.order,
 			// ellipsis: true,
+			render: (text, record, index) => {
+				return <NavLink to={`/projectdetail/${record.id}`}>{text}</NavLink>;
+			},
 			sorter: (item2, item1) => {
 				let projectName1 = item1.projectName.trim().toLowerCase();
 				let projectName2 = item2.projectName.trim().toLowerCase();
@@ -292,6 +293,7 @@ export default function ProjectManagement(props) {
 						onClick={() => {
 							const action = {
 								type: "OPEN_FORM_EDIT_PROJECT",
+								title: "Edit Project",
 								Component: <FormEditProject />,
 							};
 

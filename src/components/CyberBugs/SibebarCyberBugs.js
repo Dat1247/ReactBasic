@@ -9,10 +9,13 @@ import {
 	SearchOutlined,
 	PlusOutlined,
 } from "@ant-design/icons";
+import { useSelector, useDispatch } from "react-redux";
+import FormCreateTask from "../Forms/FormCreateTask/FormCreateTask";
 
 const { Header, Sider, Content } = Layout;
 
 export default function SibebarCyberBugs() {
+	const dispatch = useDispatch();
 	const [state, setState] = useState({
 		collapsed: true,
 	});
@@ -36,9 +39,19 @@ export default function SibebarCyberBugs() {
 					<MenuUnfoldOutlined />
 				</div>
 				<div className='logo' />
-				<Menu theme='dark' mode='inline' defaultSelectedKeys={["1"]}>
+				<Menu
+					theme='dark'
+					mode='inline'
+					defaultSelectedKeys={["1"]}
+					onClick={() => {
+						dispatch({
+							type: "OPEN_FORM_CREATE_TASK",
+							Component: <FormCreateTask />,
+							title: "Create task",
+						});
+					}}>
 					<Menu.Item key='1' icon={<PlusOutlined />}>
-						Create issue
+						Create task
 					</Menu.Item>
 					<Menu.Item key='2' icon={<SearchOutlined />}>
 						Search

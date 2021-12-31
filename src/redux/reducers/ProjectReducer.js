@@ -1,3 +1,5 @@
+import { PUT_PROJECT_DETAIL } from "../constants/CyberBugs/CyberBugsConstants";
+
 const initialState = {
 	projectEdit: {
 		id: 0,
@@ -6,6 +8,7 @@ const initialState = {
 		description: "string",
 		categoryId: "string",
 	},
+	projectDetail: {},
 };
 
 export const ProjectReducer = (state = initialState, action) => {
@@ -13,6 +16,10 @@ export const ProjectReducer = (state = initialState, action) => {
 		case "EDIT_PROJECT":
 			state.projectEdit = action.projectEditModal;
 			return { ...state };
+		case PUT_PROJECT_DETAIL: {
+			state.projectDetail = action.projectDetail;
+			return { ...state };
+		}
 		default:
 			return { ...state };
 	}
