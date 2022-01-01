@@ -1,6 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { GET_TASK_DETAIL_SAGA } from "../../../redux/constants/CyberBugs/CyberBugsConstants";
 
 export default function CotentMain(props) {
+	const dispatch = useDispatch();
 	const { projectDetail } = props;
 
 	const renderCardTaskList = () => {
@@ -8,81 +11,57 @@ export default function CotentMain(props) {
 			return (
 				<div
 					className='card'
-					style={{ width: "17rem", height: "25rem" }}
+					style={{ width: "17rem", height: "auto" }}
 					key={index}>
-					<div className='card-header'>BACKLOG 3</div>
+					<div className='card-header'>{item.statusName}</div>
 					<ul className='list-group list-group-flush'>
-						<li
-							className='list-group-item'
-							data-toggle='modal'
-							data-target='#infoModal'
-							style={{ cursor: "pointer" }}>
-							<p>
-								Each issue has a single reporter but can have multiple assignees
-							</p>
-							<div className='block' style={{ display: "flex" }}>
-								<div className='block-left'>
-									<i className='fa fa-bookmark' />
-									<i className='fa fa-arrow-up' />
-								</div>
-								<div className='block-right'>
-									<div className='avatar-group' style={{ display: "flex" }}>
-										<div className='avatar'>
-											<img
-												src={
-													require("../../../assets/img/download (1).jfif")
-														.default
-												}
-												alt='1'
-											/>
+						{item.lstTaskDeTail?.map((task, index) => {
+							return (
+								<li
+									key={index}
+									className='list-group-item mb-2'
+									data-toggle='modal'
+									data-target='#infoModal'
+									style={{ cursor: "pointer" }}
+									onClick={() => {
+										dispatch({
+											type: GET_TASK_DETAIL_SAGA,
+											taskId: task.taskId,
+										});
+									}}>
+									<p className='font-weight-bold'>{task.taskName}</p>
+									<div className='block' style={{ display: "flex" }}>
+										<div className='block-left'>
+											<p
+												style={{
+													fontWeight: "bold",
+													color:
+														task.priorityTask.priority === "High"
+															? "green"
+															: task.priorityTask.priority === "Medium"
+															? "yellow"
+															: task.priorityTask.priority === "Low"
+															? "pink"
+															: "red",
+												}}>
+												{task.priorityTask.priority}
+											</p>
 										</div>
-										<div className='avatar'>
-											<img
-												src={
-													require("../../../assets/img/download (2).jfif")
-														.default
-												}
-												alt='2'
-											/>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li className='list-group-item'>
-							<p>
-								Each issue has a single reporter but can have multiple assignees
-							</p>
-							<div className='block' style={{ display: "flex" }}>
-								<div className='block-left'>
-									<i className='fa fa-check-square' />
-									<i className='fa fa-arrow-up' />
-								</div>
-								<div className='block-right'>
-									<div className='avatar-group' style={{ display: "flex" }}>
-										<div className='avatar'>
-											<img
-												src={
-													require("../../../assets/img/download (1).jfif")
-														.default
-												}
-												alt='1'
-											/>
-										</div>
-										<div className='avatar'>
-											<img
-												src={
-													require("../../../assets/img/download (2).jfif")
-														.default
-												}
-												alt='2'
-											/>
+										<div className='block-right'>
+											<div className='avatar-group' style={{ display: "flex" }}>
+												{task.assigness?.map((item, index) => {
+													return (
+														<div className='avatar' key={index}>
+															<img src={item.avatar} alt={item.name} />
+														</div>
+													);
+												})}
+											</div>
 										</div>
 									</div>
-								</div>
-							</div>
-						</li>
-						<li className='list-group-item'>Vestibulum at eros</li>
+								</li>
+							);
+						})}
 					</ul>
 				</div>
 			);

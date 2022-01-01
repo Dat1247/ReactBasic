@@ -22,7 +22,7 @@ export const UPDATE_LIST_PROJECT_SAGA = "UPDATE_LIST_PROJECT_SAGA";
 //-------------- DELETE PROJECT----------------
 export const DELETE_PROJECT_SAGA = "DELETE_PROJECT_SAGA";
 
-//-------------- GET PROJET DETAIL----------------
+//-------------- GET PROJECT DETAIL----------------
 export const PUT_PROJECT_DETAIL = "PUT_PROJECT_DETAIL";
 
 export const GET_PROJECT_DETAIL_SAGA = "GET_PROJECT_DETAIL_SAGA";
@@ -51,3 +51,22 @@ export const GET_ALL_STATUS_SAGA = "GET_ALL_STATUS_SAGA";
 export const GET_USER_BY_PROJECT_ID_SAGA = "GET_USER_BY_PROJECT_ID_SAGA";
 
 export const GET_USER_BY_PROJECT_ID = "GET_USER_BY_PROJECT_ID";
+
+//-------------- GET TASK DETAIL -----------------------------
+export const GET_TASK_DETAIL = "GET_TASK_DETAIL";
+
+export const GET_TASK_DETAIL_SAGA = "GET_TASK_DETAIL_SAGA";
+
+export const UPDATE_STATUS_TASK_SAGA = "UPDATE_STATUS_TASK_SAGA";
+
+export const CHANGE_TASK_MODAL = "CHANGE_TASK_MODAL";
+
+export const CHANGE_ASSIGNEES = "CHANGE_ASSIGNEES";
+
+export const REMOVE_USER_ASSIGN = "REMOVE_USER_ASSIGN";
+
+export const UPDATE_TASK_SAGA = "UPDATE_TASK_SAGA";
+
+export const UPDATE_TASK = "UPDATE_TASK";
+
+export const HANDLE_CHANGE_POST_API_SAGA = "HANDLE_CHANGE_POST_API_SAGA";

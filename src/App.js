@@ -21,7 +21,7 @@ import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
 import { UserLoginTemplate } from "./templates/HomeTemplate/UserLoginTemplate";
 import { useDispatch } from "react-redux";
 import CyberBugsTemplate from "./templates/HomeTemplate/CyberBugsTemplate";
-import indexCyberBugs from "./redux/sagas/CyberBugs/indexCyberBugs";
+import indexCyberBugs from "./pages/CyberBugs/ProjectDetail/indexCyberBugs";
 import CreateProject from "./pages/CyberBugs/CreateProject/CreateProject";
 
 import ProjectManagement from "./pages/CyberBugs/ProjectManagement/ProjectManagement";
