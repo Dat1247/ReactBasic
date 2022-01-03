@@ -26,6 +26,8 @@ import CreateProject from "./pages/CyberBugs/CreateProject/CreateProject";
 
 import ProjectManagement from "./pages/CyberBugs/ProjectManagement/ProjectManagement";
 import DrawerCyberbugs from "./HOC/CyberbugsHOC/DrawerCyberbugs";
+import DemoDragDrop from "./pages/DemoDragDrop/DemoDragDrop";
+import DemoDragAndDropDnd from "./pages/DragAndDropDnd/DragAndDropDnd";
 
 function App() {
 	const history = useHistory();
@@ -60,6 +62,12 @@ function App() {
 					}}
 				/> */}
 				<HomeTemplate path='/home' exact Component={Home} />
+				<HomeTemplate path='/demodragdrop' exact Component={DemoDragDrop} />
+				<HomeTemplate
+					path='/demodragdropdnd'
+					exact
+					Component={DemoDragAndDropDnd}
+				/>
 				<Route
 					exact
 					path='/contact'

@@ -132,10 +132,10 @@ export function* theoDoiDeleteProjectSaga() {
 
 //---------------GET PROJECT DETAIL --------------------
 function* getProjectDetailSaga(action) {
-	yield put({
-		type: DISPLAY_LOADING,
-	});
-	yield delay(1000);
+	// yield put({
+	// 	type: DISPLAY_LOADING,
+	// });
+	// yield delay(1000);
 	try {
 		const { data, status } = yield call(() =>
 			projectService.getProjectDetail(action.projectId)
@@ -156,9 +156,9 @@ function* getProjectDetailSaga(action) {
 		console.log(err);
 	}
 
-	yield put({
-		type: HIDE_LOADING,
-	});
+	// yield put({
+	// 	type: HIDE_LOADING,
+	// });
 }
 
 export function* theoDoiGetProjectDetailSaga() {

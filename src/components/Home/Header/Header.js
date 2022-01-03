@@ -92,6 +92,18 @@ export default function Header() {
 								to='/todolistsaga'>
 								To do list redux-saga
 							</NavLink>
+							<NavLink
+								activeClassName='activeNavItem'
+								className='nav-link'
+								to='/demodragdrop'>
+								Demo Drag Drop
+							</NavLink>
+							<NavLink
+								activeClassName='activeNavItem'
+								className='nav-link'
+								to='/demodragdropdnd'>
+								Demo Drag Drop dnd
+							</NavLink>
 						</div>
 					</li>
 					<li className='nav-item'>
