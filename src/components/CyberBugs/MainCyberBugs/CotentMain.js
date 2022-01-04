@@ -5,16 +5,17 @@ import {
 	GET_TASK_DETAIL_SAGA,
 	UPDATE_STATUS_TASK_SAGA,
 } from "../../../redux/constants/CyberBugs/CyberBugsConstants";
+import { GET_ALL_COMMENT_SAGA } from "../../../redux/constants/CyberBugs/CommentConstants";
 
 export default function CotentMain(props) {
 	const dispatch = useDispatch();
 	const { projectDetail } = props;
 
 	const handleDragEnd = (result) => {
-		console.log(result);
+		// console.log(result);
 		let { destination, source } = result;
 		let { projectId, taskId } = JSON.parse(result.draggableId);
-		console.log(projectId, taskId);
+		// console.log(projectId, taskId);
 
 		if (!destination) {
 			return;
@@ -43,7 +44,7 @@ export default function CotentMain(props) {
 			<DragDropContext onDragEnd={handleDragEnd}>
 				{projectDetail.lstTask?.map((item, index) => {
 					return (
-						<Droppable droppableId={item.statusId}>
+						<Droppable droppableId={item.statusId} key={index}>
 							{(provided) => {
 								return (
 									<div
@@ -78,6 +79,10 @@ export default function CotentMain(props) {
 																	onClick={() => {
 																		dispatch({
 																			type: GET_TASK_DETAIL_SAGA,
+																			taskId: task.taskId,
+																		});
+																		dispatch({
+																			type: GET_ALL_COMMENT_SAGA,
 																			taskId: task.taskId,
 																		});
 																	}}>

@@ -151,3 +151,23 @@ function* getUserByProjectIdSaga(action) {
 export function* theoDoiGetUserByProjectIdSaga() {
 	yield takeLatest(GET_USER_BY_PROJECT_ID_SAGA, getUserByProjectIdSaga);
 }
+
+//-------------- GET USER COMMENT ------------------------------
+function* getUserComment(action) {
+	try {
+		const { data, status } = yield call(() =>
+			userService.getUser(action.userId)
+		);
+		console.log(data);
+		put({
+			type: "GET_USER_ID_COMMENT",
+			userComment: data.content,
+		});
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+export function* theoDoiGetUserComment() {
+	yield takeLatest("GET_USER_ID_COMMENT_SAGA", getUserComment);
+}

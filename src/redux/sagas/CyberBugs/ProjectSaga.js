@@ -147,7 +147,7 @@ function* getProjectDetailSaga(action) {
 		});
 
 		if (status === STATUS_CODE.SUCCESS) {
-			console.log(data);
+			// console.log(data);
 		}
 	} catch (err) {
 		console.log("404 Not Found!");

@@ -8,7 +8,7 @@ import {
 function* getAllStatus(action) {
 	try {
 		const { data, status } = yield call(() => statusService.getAllStatus());
-		console.log(data);
+		// console.log(data);
 		yield put({
 			type: GET_ALL_STATUS,
 			arrStatus: data.content,

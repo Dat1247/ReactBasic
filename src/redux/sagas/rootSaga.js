@@ -7,6 +7,7 @@ import * as TaskTypeSaga from "./CyberBugs/TaskTypeSaga";
 import * as PrioritySaga from "./CyberBugs/PrioritySaga";
 import * as TaskSaga from "./CyberBugs/TaskSaga";
 import * as StatusSaga from "./CyberBugs/StatusSaga";
+import * as CommentSaga from "./CyberBugs/CommentSaga";
 
 export function* rootSaga() {
 	// yield fork(getTaskAPI);
@@ -26,6 +27,7 @@ export function* rootSaga() {
 		Cyberbugs.theoDoiAddUserProject(),
 		Cyberbugs.theoDoiRemoveUserProject(),
 		Cyberbugs.theoDoiGetUserByProjectIdSaga(),
+		Cyberbugs.theoDoiGetUserComment(),
 
 		ProjectCategorySaga.theoDoigetAllProjetCategory(),
 		ProjectSaga.theoDoiCreateProjectSaga(),
@@ -46,5 +48,10 @@ export function* rootSaga() {
 		TaskSaga.theoDoiHandleChangePostAPI(),
 
 		StatusSaga.theoDoiGetAllStatus(),
+
+		CommentSaga.theoDoiGetAllComment(),
+		CommentSaga.theoDoiAddComment(),
+		CommentSaga.theoDoiDeleteComment(),
+		CommentSaga.theoDoiUpdateComment(),
 	]);
 }

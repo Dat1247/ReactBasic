@@ -8,15 +8,16 @@ import {
 	GET_ALL_PRIORITY_SAGA,
 	GET_ALL_STATUS_SAGA,
 	GET_ALL_TASK_TYPE_SAGA,
-	GET_PROJECT_DETAIL_SAGA,
 	HANDLE_CHANGE_POST_API_SAGA,
 	REMOVE_USER_ASSIGN,
-	UPDATE_STATUS_TASK_SAGA,
 } from "../../../redux/constants/CyberBugs/CyberBugsConstants";
 import { Editor } from "@tinymce/tinymce-react";
 import { Select } from "antd";
-
-const { Option } = Select;
+import {
+	ADD_COMMENT_SAGA,
+	DELETE_COMMENT_SAGA,
+	UPDATE_COMMENT_SAGA,
+} from "../../../redux/constants/CyberBugs/CommentConstants";
 
 export default function ModalCyberbugs(props) {
 	const { taskDetailModal } = useSelector((state) => state.TaskReducer);
@@ -24,12 +25,24 @@ export default function ModalCyberbugs(props) {
 	const { arrPriority } = useSelector((state) => state.PriorityReducer);
 	const { arrTaskTypes } = useSelector((state) => state.TaskTypeReducer);
 	const { projectDetail } = useSelector((state) => state.ProjectReducer);
+	const { userComment } = useSelector(
+		(state) => state.UserLoginCyberBugsReducer
+	);
+	let { listComment, commentUpdated } = useSelector(
+		(state) => state.CommentReducer
+	);
 
 	const [visibleEditor, setVisibleEditor] = useState(false);
 	const [historyContent, setHistoryContent] = useState(
 		taskDetailModal.description
 	);
 	const [content, setContent] = useState(taskDetailModal.description);
+	const [visibleComment, setVisibleComment] = useState(false);
+	const [visibleEditComment, setVisibleEditComment] = useState(false);
+	const [commentContent, setCommentContent] = useState("");
+
+	const [updateComment, setUpdateComment] = useState("");
+	const [objUpdateComment, setObjUpdateComment] = useState(commentUpdated);
 
 	const dispatch = useDispatch();
 
@@ -73,6 +86,7 @@ export default function ModalCyberbugs(props) {
 									"removeformat | help",
 							}}
 							onEditorChange={(content, editor) => {
+								setHistoryContent(taskDetailModal.description);
 								setContent(content);
 							}}
 						/>
@@ -190,6 +204,166 @@ export default function ModalCyberbugs(props) {
 		});
 	};
 
+	const renderListComment = () => {
+		return listComment?.map((comment, index) => {
+			let jsxComment = ReactHtmlParser(comment.contentComment);
+			return (
+				<div className='comment-item' key={index}>
+					<div className='display-comment' style={{ display: "flex" }}>
+						<div className='avatar'>
+							<img src={comment.user.avatar} alt={comment.user.name} />
+						</div>
+						<div>
+							<p style={{ marginBottom: 5 }}>
+								<span className='font-weight-bold'>{comment.user.name}</span> -
+								a month ago
+							</p>
+							<p style={{ marginBottom: 5 }}>{jsxComment}</p>
+							<div>
+								<span
+									className='text-success'
+									style={{ cursor: "pointer" }}
+									onClick={(e) => {
+										setObjUpdateComment({ ...comment });
+										setVisibleEditComment(true);
+										setVisibleComment(true);
+									}}>
+									Edit
+								</span>
+								<span> • </span>
+								<span
+									className='text-danger'
+									style={{ cursor: "pointer" }}
+									onClick={() => {
+										dispatch({
+											type: DELETE_COMMENT_SAGA,
+											idComment: comment.id,
+											taskId: comment.taskId,
+										});
+									}}>
+									Delete
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			);
+		});
+	};
+	const renderCommentInput = () => {
+		return (
+			<div>
+				{visibleComment ? (
+					visibleEditComment ? (
+						<div>
+							<Editor
+								name='description'
+								initialValue={objUpdateComment.contentComment}
+								init={{
+									height: 150,
+									menubar: false,
+									plugins: [
+										"advlist autolink lists link image charmap print preview anchor",
+										"searchreplace visualblocks code fullscreen",
+										"insertdatetime media table paste code help wordcount",
+									],
+									toolbar:
+										"undo redo | formatselect | " +
+										"bold italic backcolor | alignleft aligncenter " +
+										"alignright alignjustify | bullist numlist outdent indent | " +
+										"removeformat | help",
+								}}
+								onEditorChange={(content, editor) => {
+									setUpdateComment(content);
+								}}
+							/>
+							<div className='btnGroup'>
+								<button
+									className='btn btn-success m-2'
+									onClick={() => {
+										dispatch({
+											type: UPDATE_COMMENT_SAGA,
+											updateComment: {
+												...objUpdateComment,
+												contentComment: updateComment,
+											},
+										});
+										setVisibleComment(false);
+										setVisibleEditComment(false);
+									}}>
+									Update
+								</button>
+								<button
+									className='btn btn-info'
+									onClick={() => {
+										setVisibleComment(false);
+										setVisibleEditComment(false);
+									}}>
+									Cancel
+								</button>
+							</div>
+						</div>
+					) : (
+						<div>
+							<Editor
+								name='description'
+								initialValue=''
+								init={{
+									height: 150,
+									menubar: false,
+									plugins: [
+										"advlist autolink lists link image charmap print preview anchor",
+										"searchreplace visualblocks code fullscreen",
+										"insertdatetime media table paste code help wordcount",
+									],
+									toolbar:
+										"undo redo | formatselect | " +
+										"bold italic backcolor | alignleft aligncenter " +
+										"alignright alignjustify | bullist numlist outdent indent | " +
+										"removeformat | help",
+								}}
+								onEditorChange={(content, editor) => {
+									setCommentContent(content);
+								}}
+							/>
+							<div className='btnGroup'>
+								<button
+									className='btn btn-success m-2'
+									onClick={() => {
+										dispatch({
+											type: ADD_COMMENT_SAGA,
+											objComment: {
+												taskId: taskDetailModal.taskId,
+												contentComment: commentContent,
+											},
+										});
+										setVisibleComment(false);
+									}}>
+									Comment
+								</button>
+								<button
+									className='btn btn-info'
+									onClick={() => {
+										setVisibleComment(false);
+									}}>
+									Cancel
+								</button>
+							</div>
+						</div>
+					)
+				) : (
+					<input
+						type='text'
+						onClick={() => {
+							setVisibleComment(!visibleComment);
+						}}
+						placeholder='Add a comment ...'
+					/>
+				)}
+			</div>
+		);
+	};
+
 	return (
 		<div
 			className='modal fade'
@@ -250,16 +424,11 @@ export default function ModalCyberbugs(props) {
 										<h6>Comment</h6>
 										<div className='block-comment' style={{ display: "flex" }}>
 											<div className='avatar'>
-												<img
-													src={
-														require("../../../assets/img/download (1).jfif")
-															.default
-													}
-													alt='1'
-												/>
+												<img src={userComment.avatar} alt={userComment.name} />
 											</div>
 											<div className='input-comment'>
-												<input type='text' placeholder='Add a comment ...' />
+												{renderCommentInput()}
+
 												<p>
 													<span style={{ fontWeight: 500, color: "gray" }}>
 														Protip:
@@ -279,38 +448,7 @@ export default function ModalCyberbugs(props) {
 												</p>
 											</div>
 										</div>
-										<div className='lastest-comment'>
-											<div className='comment-item'>
-												<div
-													className='display-comment'
-													style={{ display: "flex" }}>
-													<div className='avatar'>
-														<img
-															src={
-																require("../../../assets/img/download (1).jfif")
-																	.default
-															}
-															alt='1'
-														/>
-													</div>
-													<div>
-														<p style={{ marginBottom: 5 }}>
-															Lord Gaben <span>a month ago</span>
-														</p>
-														<p style={{ marginBottom: 5 }}>
-															Lorem ipsum dolor sit amet, consectetur
-															adipisicing elit. Repellendus tempora ex
-															voluptatum saepe ab officiis alias totam ad
-															accusamus molestiae?
-														</p>
-														<div>
-															<span style={{ color: "#929398" }}>Edit</span>•
-															<span style={{ color: "#929398" }}>Delete</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
+										<div className='lastest-comment'>{renderListComment()}</div>
 									</div>
 								</div>
 								<div className='col-4'>
