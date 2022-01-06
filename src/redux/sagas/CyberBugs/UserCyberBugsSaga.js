@@ -14,12 +14,28 @@ import {
 	HIDE_LOADING,
 } from "../../constants/LoadingConstants";
 import { userService } from "../../../services/UserService";
+import { notifyFunction } from "../../../util/Notification/NotificationCyberbugs";
+import {
+	GET_USER_API,
+	GET_USER_SEARCH,
+	ADD_USER_PROJECT_API,
+	REMOVE_USER_PROJECT_API,
+	GET_USER_ID_COMMENT_SAGA,
+	GET_ALL_USER_SAGA,
+	GET_USER_ID_COMMENT,
+	GET_ALL_USER_APP,
+	DELETE_USER_SAGA,
+	EDIT_USER_SAGA,
+	SIGN_UP_USER_SAGA,
+} from "../../constants/CyberBugs/UserConstants";
+import { CLOSE_DRAWER } from "../../constants/CyberBugs/DrawerConstants";
 
 //Quản lý action saga
 
+//-------------- SIGN IN SAGA ------------------------------
 function* signinSaga(action) {
 	const { userLogin } = action;
-	console.log(action);
+
 	yield put({
 		type: DISPLAY_LOADING,
 	});
@@ -41,7 +57,7 @@ function* signinSaga(action) {
 		//Chuyển trang sau khi đã đăng nhập thành công
 		let history = yield select((state) => state.HistoryReducer.history);
 		// console.log(history);
-		history.push("/home");
+		history.push("/");
 
 		// console.log(data);
 	} catch (err) {
@@ -57,15 +73,17 @@ export function* theoDoiSignin() {
 	yield takeLatest(USER_SIGNIN_API, signinSaga);
 }
 
-function* getUserSaga(action) {
+//--------------- GET USER SEARCH ----------------
+
+function* getUserSearchSaga(action) {
 	try {
 		const { data, status } = yield call(() =>
 			userService.getUser(action.keyWord)
 		);
 
-		console.log(data);
+		// console.log(data);
 		yield put({
-			type: "GET_USER_SEARCH",
+			type: GET_USER_SEARCH,
 			lstUserSearch: data.content,
 		});
 
@@ -76,7 +94,7 @@ function* getUserSaga(action) {
 }
 
 export function* theoDoiGetUser() {
-	yield takeLatest("GET_USER_API", getUserSaga);
+	yield takeLatest(GET_USER_API, getUserSearchSaga);
 }
 
 //------------------ADD USER PROJECT --------------------------------
@@ -98,7 +116,7 @@ function* addUserProjectSaga(action) {
 }
 
 export function* theoDoiAddUserProject() {
-	yield takeLatest("ADD_USER_PROJECT_API", addUserProjectSaga);
+	yield takeLatest(ADD_USER_PROJECT_API, addUserProjectSaga);
 }
 
 //------------------DELETE USER PROJECT --------------------------------
@@ -120,7 +138,7 @@ function* removeUserProjectSaga(action) {
 }
 
 export function* theoDoiRemoveUserProject() {
-	yield takeLatest("REMOVE_USER_PROJECT_API", removeUserProjectSaga);
+	yield takeLatest(REMOVE_USER_PROJECT_API, removeUserProjectSaga);
 }
 
 //-------------- GET USER BY PROJECT --------------------------------
@@ -158,16 +176,130 @@ function* getUserComment(action) {
 		const { data, status } = yield call(() =>
 			userService.getUser(action.userId)
 		);
-		console.log(data);
-		put({
-			type: "GET_USER_ID_COMMENT",
-			userComment: data.content,
-		});
+		if (status === STATUS_CODE.SUCCESS) {
+			console.log(data);
+			put({
+				type: GET_USER_ID_COMMENT,
+				userComment: data.content,
+			});
+		}
 	} catch (err) {
 		console.log(err);
 	}
 }
 
 export function* theoDoiGetUserComment() {
-	yield takeLatest("GET_USER_ID_COMMENT_SAGA", getUserComment);
+	yield takeLatest(GET_USER_ID_COMMENT_SAGA, getUserComment);
+}
+
+//-------------- GET ALL USER  ------------------------------
+function* getAllUserSaga(action) {
+	try {
+		const { data, status } = yield call(() =>
+			userService.getUser(action.keyWord)
+		);
+
+		yield put({
+			type: GET_ALL_USER_APP,
+			listAllUser: data.content,
+		});
+
+		// console.log(data);
+	} catch (err) {
+		console.log(err.response.data);
+	}
+}
+
+export function* theoDoiGetAllUserSaga() {
+	yield takeLatest(GET_ALL_USER_SAGA, getAllUserSaga);
+}
+
+//-------------- DELETE USER ------------------------------
+function* deleteUserSaga(action) {
+	try {
+		const { data, status } = yield call(() =>
+			userService.deleteUser(action.userId)
+		);
+
+		if (status === STATUS_CODE.SUCCESS) {
+			yield put({
+				type: GET_ALL_USER_SAGA,
+				keyWord: "",
+			});
+		}
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+export function* theoDoiDeleteUserSaga() {
+	yield takeLatest(DELETE_USER_SAGA, deleteUserSaga);
+}
+
+//-------------- EDIT USER SAGA ------------------------------
+function* editUserSaga(action) {
+	yield put({
+		type: DISPLAY_LOADING,
+	});
+	yield delay(300);
+	try {
+		const { data, status } = yield call(() =>
+			userService.editUser(action.userEdit)
+		);
+
+		if (status === STATUS_CODE.SUCCESS) {
+			yield put({
+				type: GET_ALL_USER_SAGA,
+				keyWord: "",
+			});
+			notifyFunction("success", "Edit user successfully!", "");
+
+			yield put({ type: CLOSE_DRAWER });
+		}
+	} catch (err) {
+		console.log(err);
+	}
+
+	yield put({
+		type: HIDE_LOADING,
+	});
+}
+
+export function* theoDoiEditUserSaga() {
+	yield takeLatest(EDIT_USER_SAGA, editUserSaga);
+}
+
+//--------------- SIGN UP USER SAGA --------------------
+function* signUpUserSaga(action) {
+	yield put({
+		type: DISPLAY_LOADING,
+	});
+	yield delay(1000);
+
+	try {
+		const { data, status } = yield call(() =>
+			userService.signUpUser(action.userSignUp)
+		);
+		console.log(data);
+
+		yield put({
+			type: GET_ALL_USER_SAGA,
+			keyWord: "",
+		});
+
+		yield put({ type: CLOSE_DRAWER });
+
+		notifyFunction("success", "Sign up successfully!", "");
+	} catch (err) {
+		const message = err.response.data.message;
+		notifyFunction("error", `${message}`, "");
+	}
+
+	yield put({
+		type: HIDE_LOADING,
+	});
+}
+
+export function* theoDoiSignUpUserSaga() {
+	yield takeLatest(SIGN_UP_USER_SAGA, signUpUserSaga);
 }

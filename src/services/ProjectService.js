@@ -6,42 +6,42 @@ export class ProjectService extends baseService {
 	}
 
 	getAllProject = () => {
-		return this.get(`/Project/getAllProject`);
+		return this.get(`Project/getAllProject`);
 	};
 
 	signinCyberBugs = (userLogin) => {
-		return this.post(`/Users/signin`, userLogin);
+		return this.post(`Users/signin`, userLogin);
 	};
 
 	getAllProjectCategory = () => {
-		return this.get(`/ProjectCategory`);
+		return this.get(`ProjectCategory`);
 	};
 
 	createProject = (newProject) => {
-		return this.post(`/Project/createProject`, newProject);
+		return this.post(`Project/createProject`, newProject);
 	};
 
 	createProjectAuthorization = (newProject) => {
-		return this.post(`/Project/createProjectAuthorize`, newProject);
+		return this.post(`Project/createProjectAuthorize`, newProject);
 	};
 
 	getListProject = () => {
-		return this.get(`/Project/getAllProject`);
+		return this.get(`Project/getAllProject`);
 	};
 
 	updateProject = (projectUpdate) => {
 		return this.put(
-			`/Project/updateProject?projectId=${projectUpdate.id}`,
+			`Project/updateProject?projectId=${projectUpdate.id}`,
 			projectUpdate
 		);
 	};
 
 	deleteProject = (id) => {
-		return this.delete(`/Project/deleteProject?projectId=${id}`);
+		return this.delete(`Project/deleteProject?projectId=${id}`);
 	};
 
 	getProjectDetail = (projectId) => {
-		return this.get(`/Project/getProjectDetail?id=${projectId}`);
+		return this.get(`Project/getProjectDetail?id=${projectId}`);
 	};
 }
 

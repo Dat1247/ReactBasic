@@ -28,6 +28,10 @@ export function* rootSaga() {
 		Cyberbugs.theoDoiRemoveUserProject(),
 		Cyberbugs.theoDoiGetUserByProjectIdSaga(),
 		Cyberbugs.theoDoiGetUserComment(),
+		Cyberbugs.theoDoiGetAllUserSaga(),
+		Cyberbugs.theoDoiDeleteUserSaga(),
+		Cyberbugs.theoDoiEditUserSaga(),
+		Cyberbugs.theoDoiSignUpUserSaga(),
 
 		ProjectCategorySaga.theoDoigetAllProjetCategory(),
 		ProjectSaga.theoDoiCreateProjectSaga(),

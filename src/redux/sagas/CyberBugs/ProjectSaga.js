@@ -20,6 +20,7 @@ import {
 import { history } from "../../../util/libs/history";
 import { projectService } from "../../../services/ProjectService";
 import { notifyFunction } from "../../../util/Notification/NotificationCyberbugs";
+import { CLOSE_DRAWER } from "../../constants/CyberBugs/DrawerConstants";
 
 function* createProjectSaga(action) {
 	yield put({
@@ -86,7 +87,7 @@ function* updateProjectSaga(action) {
 			console.log(data);
 		}
 		yield call(getListProjectSaga);
-		yield put({ type: "CLOSE_DRAWER" });
+		yield put({ type: CLOSE_DRAWER });
 	} catch (err) {
 		console.log(err);
 	}
@@ -115,7 +116,7 @@ function* deleteProjectSaga(action) {
 			notifyFunction("error", "Delete project fail!", "");
 		}
 		yield call(getListProjectSaga);
-		yield put({ type: "CLOSE_DRAWER" });
+		yield put({ type: CLOSE_DRAWER });
 	} catch (err) {
 		notifyFunction("error", "Delete project fail!", "");
 		console.log(err);
@@ -150,10 +151,10 @@ function* getProjectDetailSaga(action) {
 			// console.log(data);
 		}
 	} catch (err) {
-		console.log("404 Not Found!");
+		// console.log("404 Not Found!");
+		console.log(err);
 		let history = yield select((state) => state.HistoryReducer.history);
 		history.push("/projectmanagement");
-		console.log(err);
 	}
 
 	// yield put({

@@ -6,22 +6,22 @@ class CommentService extends baseService {
 	}
 
 	getAllComment = (taskId) => {
-		return this.get(`/Comment/getAll?taskId=${taskId}`);
+		return this.get(`Comment/getAll?taskId=${taskId}`);
 	};
 
 	addComment = (objComment) => {
-		return this.post(`/Comment/insertComment`, objComment);
+		return this.post(`Comment/insertComment`, objComment);
 	};
 
 	updateComment = (updateComment) => {
 		return this.put(
-			`/Comment/updateComment?id=${updateComment.id}&contentComment=${updateComment.contentComment}`,
+			`Comment/updateComment?id=${updateComment.id}&contentComment=${updateComment.contentComment}`,
 			updateComment
 		);
 	};
 
 	deleteComment = (idComment) => {
-		return this.delete(`/Comment/deleteComment?idComment=${idComment}`);
+		return this.delete(`Comment/deleteComment?idComment=${idComment}`);
 	};
 }
 

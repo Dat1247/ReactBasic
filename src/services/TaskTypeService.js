@@ -6,7 +6,7 @@ class TaskTypeService extends baseService {
 	}
 
 	getAllTaskType = () => {
-		return this.get(`/TaskType/getAll`);
+		return this.get(`TaskType/getAll`);
 	};
 }
 

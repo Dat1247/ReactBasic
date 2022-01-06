@@ -6,7 +6,7 @@ export default function LoadingComponent() {
 	const isLoading = useSelector((state) => state.LoadingReducer.isLoading);
 	if (isLoading) {
 		return (
-			<div class={styleLoading.bgLoading}>
+			<div className={styleLoading.bgLoading}>
 				<img
 					src={require("../../../assets/imgLoading/loading.gif").default}
 					alt='loading'

@@ -6,7 +6,9 @@ import { useDispatch, useSelector, connect } from "react-redux";
 import {
 	CREATE_PROJECT_SAGA,
 	GET_ALL_PROJECT_CATEGORY_SAGA,
+	UPDATE_LIST_PROJECT_SAGA,
 } from "../../../redux/constants/CyberBugs/CyberBugsConstants";
+import { SET_SUBMIT_EDIT_PROJECT_FORM } from "../../../redux/constants/CyberBugs/DrawerConstants";
 
 function FormEditProject(props) {
 	const {
@@ -37,7 +39,7 @@ function FormEditProject(props) {
 
 		// Load sự kiện submit lên drawer = nút submit
 		dispatch({
-			type: "SET_SUBMIT_EDIT_PROJECT_FORM",
+			type: SET_SUBMIT_EDIT_PROJECT_FORM,
 			submitFunction: handleSubmit,
 		});
 	}, []);
@@ -124,6 +126,7 @@ function FormEditProject(props) {
 const editProjectForm = withFormik({
 	enableReinitialize: true,
 	mapPropsToValues: (props) => {
+		console.log(props);
 		const { projectEdit } = props;
 		return {
 			id: projectEdit?.id,
@@ -137,7 +140,7 @@ const editProjectForm = withFormik({
 		// console.log("value", value);
 		//Khi người dùng bấm submit => đưa dữ liệu về BE thông qua api
 		const action = {
-			type: "UPDATE_LIST_PROJECT_SAGA",
+			type: UPDATE_LIST_PROJECT_SAGA,
 			projectUpdate: value,
 		};
 		//Gọi saga

@@ -5,14 +5,15 @@ import * as Yup from "yup";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch, connect } from "react-redux";
 import {
+	CREATE_TASK_SAGA,
 	GET_ALL_PRIORITY_SAGA,
 	GET_ALL_PROJECT_SAGA,
 	GET_ALL_STATUS_SAGA,
 	GET_ALL_TASK_TYPE_SAGA,
 	GET_USER_BY_PROJECT_ID_SAGA,
 } from "../../../redux/constants/CyberBugs/CyberBugsConstants";
-
-const { Option } = Select;
+import { GET_USER_API } from "../../../redux/constants/CyberBugs/UserConstants";
+import { SET_SUBMIT_CREATE_TASK } from "../../../redux/constants/CyberBugs/DrawerConstants";
 
 function FormCreateTask(props) {
 	const {
@@ -59,7 +60,7 @@ function FormCreateTask(props) {
 			type: GET_ALL_PRIORITY_SAGA,
 		});
 		dispatch({
-			type: "GET_USER_API",
+			type: GET_USER_API,
 			keyWord: "",
 		});
 		dispatch({
@@ -68,7 +69,7 @@ function FormCreateTask(props) {
 
 		//Đưa hàm handleSubmit lên DrawerCyberbugsReducer để cập nhật lại sự kiện cho nút submit
 		dispatch({
-			type: "SET_SUBMIT_CREATE_TASK",
+			type: SET_SUBMIT_CREATE_TASK,
 			submitFunction: handleSubmit,
 		});
 	}, []);
@@ -308,7 +309,7 @@ const formCreateTask = withFormik({
 	// validationSchema: Yup.object().shape({}),
 	handleSubmit: (value, { props, setSubmitting }) => {
 		props.dispatch({
-			type: "CREATE_TASK_SAGA",
+			type: CREATE_TASK_SAGA,
 			taskObject: value,
 		});
 		console.log(value);

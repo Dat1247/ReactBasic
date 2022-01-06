@@ -11,9 +11,19 @@ import {
 } from "antd";
 import { EditOutlined, DeleteOutlined, CloseOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { GET_LIST_PROJECT_SAGA } from "../../../redux/constants/CyberBugs/CyberBugsConstants";
+import {
+	DELETE_PROJECT_SAGA,
+	EDIT_PROJECT,
+	GET_LIST_PROJECT_SAGA,
+} from "../../../redux/constants/CyberBugs/CyberBugsConstants";
+import {
+	ADD_USER_PROJECT_API,
+	GET_USER_API,
+	REMOVE_USER_PROJECT_API,
+} from "../../../redux/constants/CyberBugs/UserConstants";
 import FormEditProject from "../../../components/Forms/FormEditProject/FormEditProject";
 import { NavLink } from "react-router-dom";
+import { OPEN_FORM_EDIT_PROJECT } from "../../../redux/constants/CyberBugs/DrawerConstants";
 
 export default function ProjectManagement(props) {
 	const projectList = useSelector(
@@ -41,7 +51,7 @@ export default function ProjectManagement(props) {
 	}, []);
 
 	const handleChange = (pagination, filters, sorter) => {
-		console.log("Various parameters", pagination, filters, sorter);
+		// console.log("Various parameters", pagination, filters, sorter);
 		setState({
 			filteredInfo: filters,
 			sortedInfo: sorter,
@@ -203,7 +213,7 @@ export default function ProjectManagement(props) {
 																		icon={<CloseOutlined />}
 																		onClick={() => {
 																			dispatch({
-																				type: "REMOVE_USER_PROJECT_API",
+																				type: REMOVE_USER_PROJECT_API,
 																				userProject: {
 																					userId: item.userId,
 																					projectId: record.id,
@@ -237,7 +247,7 @@ export default function ProjectManagement(props) {
 											}
 											searchRef.current = setTimeout(() => {
 												dispatch({
-													type: "GET_USER_API",
+													type: GET_USER_API,
 													keyWord: value,
 												});
 											}, 300);
@@ -258,7 +268,7 @@ export default function ProjectManagement(props) {
 
 											//Goi api gui ve back-end
 											dispatch({
-												type: "ADD_USER_PROJECT_API",
+												type: ADD_USER_PROJECT_API,
 												userProject: {
 													projectId: record.id,
 													userId: valueSelect,
@@ -292,7 +302,7 @@ export default function ProjectManagement(props) {
 						type='primary'
 						onClick={() => {
 							const action = {
-								type: "OPEN_FORM_EDIT_PROJECT",
+								type: OPEN_FORM_EDIT_PROJECT,
 								title: "Edit Project",
 								Component: <FormEditProject />,
 							};
@@ -302,7 +312,7 @@ export default function ProjectManagement(props) {
 
 							//dispatch dữ liệu dòng hiện tại lên reducer
 							const actionEditProject = {
-								type: "EDIT_PROJECT",
+								type: EDIT_PROJECT,
 								projectEditModal: record,
 							};
 							dispatch(actionEditProject);
@@ -313,7 +323,7 @@ export default function ProjectManagement(props) {
 					<Popconfirm
 						title='Are you sure to delete this project?'
 						onConfirm={() => {
-							dispatch({ type: "DELETE_PROJECT_SAGA", idProject: record.id });
+							dispatch({ type: DELETE_PROJECT_SAGA, idProject: record.id });
 						}}
 						// onCancel={cancel}
 						okText='Yes'

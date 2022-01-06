@@ -2,17 +2,14 @@ import React, { useState } from "react";
 import { Layout, Menu } from "antd";
 import {
 	MenuUnfoldOutlined,
-	MenuFoldOutlined,
-	UserOutlined,
-	VideoCameraOutlined,
-	UploadOutlined,
 	SearchOutlined,
 	PlusOutlined,
 } from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import FormCreateTask from "../Forms/FormCreateTask/FormCreateTask";
+import { OPEN_FORM_CREATE_TASK } from "../../redux/constants/CyberBugs/DrawerConstants";
 
-const { Header, Sider, Content } = Layout;
+const { Sider } = Layout;
 
 export default function SibebarCyberBugs() {
 	const dispatch = useDispatch();
@@ -45,7 +42,7 @@ export default function SibebarCyberBugs() {
 					defaultSelectedKeys={["1"]}
 					onClick={() => {
 						dispatch({
-							type: "OPEN_FORM_CREATE_TASK",
+							type: OPEN_FORM_CREATE_TASK,
 							Component: <FormCreateTask />,
 							title: "Create task",
 						});

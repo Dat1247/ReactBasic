@@ -1,0 +1,23 @@
+export const GET_USER_API = "GET_USER_API";
+
+export const GET_USER_SEARCH = "GET_USER_SEARCH";
+
+export const ADD_USER_PROJECT_API = "ADD_USER_PROJECT_API";
+
+export const REMOVE_USER_PROJECT_API = "REMOVE_USER_PROJECT_API";
+
+export const GET_USER_ID_COMMENT_SAGA = "GET_USER_ID_COMMENT_SAGA";
+
+export const GET_USER_ID_COMMENT = "GET_USER_ID_COMMENT";
+
+export const GET_ALL_USER_SAGA = "GET_ALL_USER_SAGA";
+
+export const GET_ALL_USER_APP = "GET_ALL_USER_APP";
+
+export const DELETE_USER_SAGA = "DELETE_USER_SAGA";
+
+export const EDIT_USER_SAGA = "EDIT_USER_SAGA";
+
+export const SIGN_UP_USER_SAGA = "SIGN_UP_USER_SAGA";
+
+export const EDIT_USER = "EDIT_USER";

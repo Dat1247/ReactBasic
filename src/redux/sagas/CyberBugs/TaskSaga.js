@@ -5,6 +5,7 @@ import { notifyFunction } from "../../../util/Notification/NotificationCyberbugs
 import {
 	CHANGE_ASSIGNEES,
 	CHANGE_TASK_MODAL,
+	CREATE_TASK_SAGA,
 	GET_PROJECT_DETAIL_SAGA,
 	GET_TASK_DETAIL,
 	GET_TASK_DETAIL_SAGA,
@@ -13,6 +14,7 @@ import {
 	UPDATE_STATUS_TASK_SAGA,
 	UPDATE_TASK_SAGA,
 } from "../../constants/CyberBugs/CyberBugsConstants";
+import { CLOSE_DRAWER } from "../../constants/CyberBugs/DrawerConstants";
 import {
 	DISPLAY_LOADING,
 	HIDE_LOADING,
@@ -30,10 +32,9 @@ function* createTaskSaga(action) {
 		);
 
 		if (status === STATUS_CODE.SUCCESS) {
+			yield put({ type: CLOSE_DRAWER });
+			notifyFunction("success", "Create task successfully!", "");
 		}
-
-		yield put({ type: "CLOSE_DRAWER" });
-		notifyFunction("success", "Create task successfully!", "");
 	} catch (err) {
 		console.log(err);
 	}
@@ -44,7 +45,7 @@ function* createTaskSaga(action) {
 }
 
 export function* theoDoiCreateTaskSaga() {
-	yield takeLatest("CREATE_TASK_SAGA", createTaskSaga);
+	yield takeLatest(CREATE_TASK_SAGA, createTaskSaga);
 }
 
 //-------------------------- GET TASK DETAIL --------------------------------------

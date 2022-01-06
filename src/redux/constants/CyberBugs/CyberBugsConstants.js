@@ -19,6 +19,9 @@ export const GET_PROJECT_LIST = "GET_PROJECT_LIST";
 //--------------- UPDATE PROJECT----------------
 export const UPDATE_LIST_PROJECT_SAGA = "UPDATE_LIST_PROJECT_SAGA";
 
+//-------------- EDIT PROJECT ----------------
+export const EDIT_PROJECT = "EDIT_PROJECT";
+
 //-------------- DELETE PROJECT----------------
 export const DELETE_PROJECT_SAGA = "DELETE_PROJECT_SAGA";
 
@@ -57,6 +60,8 @@ export const GET_TASK_DETAIL = "GET_TASK_DETAIL";
 
 export const GET_TASK_DETAIL_SAGA = "GET_TASK_DETAIL_SAGA";
 
+export const CREATE_TASK_SAGA = "CREATE_TASK_SAGA";
+
 export const UPDATE_STATUS_TASK_SAGA = "UPDATE_STATUS_TASK_SAGA";
 
 export const CHANGE_TASK_MODAL = "CHANGE_TASK_MODAL";
@@ -70,3 +75,9 @@ export const UPDATE_TASK_SAGA = "UPDATE_TASK_SAGA";
 export const UPDATE_TASK = "UPDATE_TASK";
 
 export const HANDLE_CHANGE_POST_API_SAGA = "HANDLE_CHANGE_POST_API_SAGA";
+
+//-------------- OPEN FORM --------------------------------
+export const OPEN_FORM = "OPEN_FORM";
+
+//-------------- ADD HISTORY --------------------------------
+export const ADD_HISTORY = "ADD_HISTORY";

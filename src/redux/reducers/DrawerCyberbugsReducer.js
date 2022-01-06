@@ -1,4 +1,14 @@
 import React from "react";
+import {
+	CLOSE_DRAWER,
+	OPEN_DRAWER,
+	OPEN_FORM_CREATE_TASK,
+	OPEN_FORM_EDIT_PROJECT,
+	OPEN_FORM_EDIT_USER,
+	OPEN_FORM_SIGN_UP_USER,
+	SET_SUBMIT_CREATE_TASK,
+	SET_SUBMIT_EDIT_PROJECT_FORM,
+} from "../constants/CyberBugs/DrawerConstants";
 const initialState = {
 	visible: false,
 	title: "",
@@ -10,13 +20,13 @@ const initialState = {
 
 const DrawerCyberbugsReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case "OPEN_DRAWER": {
+		case OPEN_DRAWER: {
 			return { ...state, visible: true };
 		}
-		case "CLOSE_DRAWER": {
+		case CLOSE_DRAWER: {
 			return { ...state, visible: false };
 		}
-		case "OPEN_FORM_EDIT_PROJECT": {
+		case OPEN_FORM_EDIT_PROJECT: {
 			return {
 				...state,
 				visible: true,
@@ -24,16 +34,28 @@ const DrawerCyberbugsReducer = (state = initialState, action) => {
 				ComponentDrawerContent: action.Component,
 			};
 		}
-		case "SET_SUBMIT_EDIT_PROJECT_FORM": {
+		case SET_SUBMIT_EDIT_PROJECT_FORM: {
 			state.callBackSubmit = action.submitFunction;
 			return { ...state };
 		}
 
-		case "SET_SUBMIT_CREATE_TASK": {
+		case SET_SUBMIT_CREATE_TASK: {
 			state.callBackSubmit = action.submitFunction;
 			return { ...state };
 		}
-		case "OPEN_FORM_CREATE_TASK": {
+		case OPEN_FORM_CREATE_TASK: {
+			state.visible = true;
+			state.title = action.title;
+			state.ComponentDrawerContent = action.Component;
+			return { ...state };
+		}
+		case OPEN_FORM_EDIT_USER: {
+			state.visible = true;
+			state.title = action.title;
+			state.ComponentDrawerContent = action.Component;
+			return { ...state };
+		}
+		case OPEN_FORM_SIGN_UP_USER: {
 			state.visible = true;
 			state.title = action.title;
 			state.ComponentDrawerContent = action.Component;

@@ -6,7 +6,7 @@ class StatusService extends baseService {
 	}
 
 	getAllStatus = () => {
-		return this.get(`/Status/getAll`);
+		return this.get(`Status/getAll`);
 	};
 }
 

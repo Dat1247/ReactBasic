@@ -6,7 +6,7 @@ class PriorityService extends baseService {
 	}
 
 	getAllPriority = () => {
-		return this.get(`/Priority/getAll`);
+		return this.get(`Priority/getAll`);
 	};
 }
 
