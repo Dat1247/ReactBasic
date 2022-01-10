@@ -1,0 +1,7 @@
+.text-color-red {
+    color: red;
+}
+
+.content {
+    @apply text-sm text-white ml-5 pl-5 duration-500;
+}

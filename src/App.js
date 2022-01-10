@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import BaiTapTongHop from "./BaiTapTongHop/BaiTapTongHop";
+import CompareDemo from "./LodashComponent/CompareDemo";
+import FillDemo from "./LodashComponent/FillDemo";
+import FlattenDemo from "./LodashComponent/FlattenDemo";
+import JoinDemo from "./LodashComponent/JoinDemo";
+import LastFirstDemo from "./LodashComponent/LastFirstDemo";
+import SortByDemo from "./LodashComponent/SortByDemo";
+import UniqDemo from "./LodashComponent/UniqDemo";
+import BaiTapLayout from "./TailwindComponent/BaiTapLayout";
+import CustomCSS from "./TailwindComponent/CustomCSS";
+import DemoFlex from "./TailwindComponent/DemoFlex";
+import DemoGrid from "./TailwindComponent/DemoGrid";
+import DemoPaddingMargin from "./TailwindComponent/DemoPaddingMargin";
+import DemoWidthHeight from "./TailwindComponent/DemoWidthHeight";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div>
+			{/* <DemoGrid /> */}
+			{/* <DemoPaddingMargin /> */}
+			{/* <DemoWidthHeight /> */}
+			{/* <DemoFlex /> */}
+			{/* <CustomCSS /> */}
+			{/* <BaiTapLayout /> */}
+			{/* <JoinDemo /> */}
+			{/* <LastFirstDemo /> */}
+			{/* <SortByDemo /> */}
+			{/* <FillDemo /> */}
+			{/* <UniqDemo /> */}
+			{/* <FlattenDemo /> */}
+			{/* <CompareDemo /> */}
+			<BaiTapTongHop />
+		</div>
+	);
 }
 
 export default App;
