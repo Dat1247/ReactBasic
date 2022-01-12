@@ -7,6 +7,10 @@ import { Provider } from "react-redux";
 import { store } from "./redux/configStore";
 import "antd/dist/antd.css";
 
+//React Slick
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 ReactDOM.render(
 	<Provider store={store}>
 		<App />
