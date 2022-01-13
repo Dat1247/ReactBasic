@@ -2,10 +2,12 @@ import React from "react";
 import "./Film_Flip.css";
 import { PlayCircleOutlined } from "@ant-design/icons";
 
+import { history } from "../../App";
+
 export default function Film_Flip(props) {
 	const { film } = props;
 	return (
-		<div className='flip-card mt-4'>
+		<div className='flip-card my-4'>
 			<div className='flip-card-inner'>
 				<div className='flip-card-front'>
 					{/* <div
@@ -50,7 +52,11 @@ export default function Film_Flip(props) {
 					</div>
 				</div>
 			</div>
-			<div className='bg-indigo-300 text-center py-2 my-2 text-success-50 font-bold cursor-pointer'>
+			<div
+				onClick={() => {
+					history.push(`/detail/${film.maPhim}`);
+				}}
+				className='bg-indigo-300 text-center py-2 my-2 text-success-50 font-bold cursor-pointer w-full'>
 				ĐẶT VÉ
 			</div>
 		</div>

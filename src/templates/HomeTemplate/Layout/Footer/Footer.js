@@ -1,6 +1,16 @@
 import React from "react";
+import _ from "lodash";
+import { useSelector } from "react-redux";
 
 export default function Footer(props) {
+	const { heThongRapChieu } = useSelector((state) => state.QuanLyRapReducer);
+
+	const arrHeThongRap = _.map(heThongRapChieu, (heThongRap) =>
+		_.pick(heThongRap, ["maHeThongRap", "tenHeThongRap", "logo"])
+	);
+
+	console.log(arrHeThongRap);
+
 	return (
 		<footer className='py-6 dark:bg-coolGray-800 dark:text-coolGray-50 bg-black text-white'>
 			<div className='container px-6 mx-auto space-y-6 divide-y divide-coolGray-400 md:space-y-12 divide-opacity-50'>
@@ -25,32 +35,18 @@ export default function Footer(props) {
 					</div>
 					<div className='col-span-6 text-center md:text-left md:col-span-3'>
 						<p className='pb-1 text-lg font-medium'>Category</p>
-						<ul>
-							<li>
-								<a href='#' className='hover:dark:text-violet-400 text-white'>
-									Link
-								</a>
-							</li>
-							<li>
-								<a href='#' className='hover:dark:text-violet-400 text-white'>
-									Link
-								</a>
-							</li>
-							<li>
-								<a href='#' className='hover:dark:text-violet-400 text-white'>
-									Link
-								</a>
-							</li>
-							<li>
-								<a href='#' className='hover:dark:text-violet-400 text-white'>
-									Link
-								</a>
-							</li>
-							<li>
-								<a href='#' className='hover:dark:text-violet-400 text-white'>
-									Link
-								</a>
-							</li>
+						<ul className='grid grid-cols-5 gap-6'>
+							{arrHeThongRap.map((heThongRap, index) => {
+								return (
+									<li key={index}>
+										<img
+											src={heThongRap.logo}
+											className='w-full'
+											alt={heThongRap.tenHeThongRap}
+										/>
+									</li>
+								);
+							})}
 						</ul>
 					</div>
 					<div className='col-span-6 text-center md:text-left md:col-span-3'>
