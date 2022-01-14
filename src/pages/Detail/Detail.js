@@ -132,7 +132,7 @@ export default function Detail(props) {
 																.map((lichChieu, index) => {
 																	return (
 																		<NavLink
-																			to='/'
+																			to={`/checkout/${lichChieu.maLichChieu}`}
 																			key={index}
 																			className='col-span-1 text-green-500 font-bold'>
 																			{moment(
