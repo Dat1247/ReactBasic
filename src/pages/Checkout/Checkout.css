@@ -21,3 +21,11 @@
 .gheVip {
     background-color: rgb(228, 74, 8);
 }
+
+.gheDaDuocDat {
+    background-color: rgb(246, 246, 246);
+    box-shadow: -1px 2px 18px -6px #000;
+    -webkit-box-shadow: -1px 2px 18px -6px #000;
+    color: red;
+    border: 1px solid #000;
+}
