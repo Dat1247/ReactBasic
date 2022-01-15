@@ -2,6 +2,7 @@ import { ThongTinLichChieu } from "../../_core/models/ThongTinPhongVe";
 import {
 	CHANGE_TAB,
 	CHUYEN_TAB_ACTIVE,
+	DAT_GHE,
 	DAT_VE,
 	DAT_VE_HOAN_TAT,
 	SET_CHI_TIET_PHONG_VE,
@@ -11,6 +12,7 @@ const initialState = {
 	chiTietPhongVe: new ThongTinLichChieu(),
 	danhSachGheDangDat: [],
 	tabActive: "1",
+	danhSachGheKhachDat: [],
 };
 
 export const QuanLyDatVeReducer = (state = initialState, action) => {
@@ -43,6 +45,10 @@ export const QuanLyDatVeReducer = (state = initialState, action) => {
 		}
 		case CHUYEN_TAB_ACTIVE: {
 			state.tabActive = action.tabActive;
+			return { ...state };
+		}
+		case DAT_GHE: {
+			state.danhSachGheKhachDat = action.danhSachGheKhachDat;
 			return { ...state };
 		}
 		default:

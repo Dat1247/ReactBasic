@@ -29,3 +29,8 @@
     color: red;
     border: 1px solid #000;
 }
+
+.gheKhachDat {
+    background-color: rgb(1, 149, 207) !important;
+    cursor: no-drop;
+}
