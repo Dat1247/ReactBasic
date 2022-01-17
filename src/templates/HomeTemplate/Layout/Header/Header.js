@@ -1,18 +1,66 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { history } from "../../../../App";
 import { Select } from "antd";
+import { useSelector } from "react-redux";
+import _ from "lodash";
 
 //Hook đa ngôn ngữ
 import { useTranslation } from "react-i18next";
+import { TOKEN, USER_LOGIN } from "../../../../util/settings/config";
 
 const { Option } = Select;
 
 export default function Header(props) {
+	const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
 	const { t, i18n } = useTranslation();
 
 	const handleChange = (value) => {
 		i18n.changeLanguage(value);
+	};
+
+	const renderLogin = () => {
+		if (_.isEmpty(userLogin)) {
+			return (
+				<Fragment>
+					<button
+						className='self-center px-8 py-3 rounded'
+						onClick={() => {
+							history.push("/login");
+						}}>
+						{t("signin")}
+					</button>
+					<button
+						onClick={() => {
+							history.push("/register");
+						}}
+						className='self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-coolGray-900'>
+						{t("register")}
+					</button>
+				</Fragment>
+			);
+		}
+		return (
+			<Fragment>
+				<button
+					className='self-center px-8 py-3 rounded'
+					onClick={() => {
+						history.push("/profile");
+					}}>
+					<b>Hello !</b> {userLogin.taiKhoan}
+				</button>
+				<button
+					onClick={() => {
+						localStorage.removeItem(USER_LOGIN);
+						localStorage.removeItem(TOKEN);
+						history.push("/");
+						window.location.reload();
+					}}
+					className='mr-3'>
+					Sign out
+				</button>
+			</Fragment>
+		);
 	};
 
 	return (
@@ -54,20 +102,8 @@ export default function Header(props) {
 					</li>
 				</ul>
 				<div className='items-center flex-shrink-0 hidden lg:flex'>
-					<button
-						className='self-center px-8 py-3 rounded'
-						onClick={() => {
-							history.push("/login");
-						}}>
-						{t("signin")}
-					</button>
-					<button
-						onClick={() => {
-							history.push("/register");
-						}}
-						className='self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-coolGray-900'>
-						{t("register")}
-					</button>
+					{renderLogin()}
+
 					<Select
 						defaultValue='en'
 						style={{ width: 75 }}

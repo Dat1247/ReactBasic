@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { dangNhapAction } from "../../redux/actions/QuanLyNguoiDungActions";
+import { history } from "../../App";
 
 export default function Login(props) {
 	const dispatch = useDispatch();
@@ -23,7 +24,11 @@ export default function Login(props) {
 	return (
 		<div className='lg:w-1/2 xl:max-w-screen-sm'>
 			<div className='py-12 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12'>
-				<div className='cursor-pointer flex items-center'>
+				<div
+					className='cursor-pointer flex items-center'
+					onClick={() => {
+						history.push("/");
+					}}>
 					<div>
 						<svg
 							className='w-10 text-indigo-500'

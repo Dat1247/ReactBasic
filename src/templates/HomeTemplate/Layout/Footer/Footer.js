@@ -9,8 +9,6 @@ export default function Footer(props) {
 		_.pick(heThongRap, ["maHeThongRap", "tenHeThongRap", "logo"])
 	);
 
-	console.log(arrHeThongRap);
-
 	return (
 		<footer className='py-6 dark:bg-coolGray-800 dark:text-coolGray-50 bg-black text-white'>
 			<div className='container px-6 mx-auto space-y-6 divide-y divide-coolGray-400 md:space-y-12 divide-opacity-50'>

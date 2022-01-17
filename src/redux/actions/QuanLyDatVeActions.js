@@ -12,6 +12,7 @@ import { displayLoadingAction, hideLoadingAction } from "./LoadingActions";
 export const layChiTietPhongVeAction = (maLichChieu) => {
 	return async (dispatch) => {
 		try {
+			dispatch(displayLoadingAction);
 			const result = await quanLyDatVeService.layChiTietPhongVe(maLichChieu);
 
 			if (result.status === 200) {
@@ -21,8 +22,11 @@ export const layChiTietPhongVeAction = (maLichChieu) => {
 				});
 			}
 		} catch (err) {
+			dispatch(hideLoadingAction);
+
 			console.log(err);
 		}
+		dispatch(hideLoadingAction);
 	};
 };
 

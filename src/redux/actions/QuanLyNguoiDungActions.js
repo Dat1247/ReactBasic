@@ -35,7 +35,6 @@ export const layThongTinNguoiDungAction = () => {
 					thongTinNguoiDung: result.data.content,
 				});
 			}
-			console.log(result);
 		} catch (err) {
 			console.log(err.response?.data);
 			console.log(err);

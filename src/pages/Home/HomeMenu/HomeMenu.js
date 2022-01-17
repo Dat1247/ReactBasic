@@ -7,7 +7,6 @@ const { TabPane } = Tabs;
 
 export default function HomeMenu(props) {
 	const { heThongRapChieu } = props;
-	console.log(heThongRapChieu);
 
 	const renderHeThongRap = () => {
 		return heThongRapChieu?.map((heThongRap, index) => {
@@ -65,7 +64,7 @@ export default function HomeMenu(props) {
 																	.map((lichChieu, index) => {
 																		return (
 																			<NavLink
-																				to='/'
+																				to={`/checkout/${lichChieu.maLichChieu}`}
 																				key={index}
 																				className='text-base border-green-400 border-2 bg-green-400 text-white p-2 hover:bg-white hover:text-green-400 '>
 																				{moment(

@@ -13,6 +13,7 @@ import CheckoutTemplate from "./templates/CheckoutTemplate/CheckoutTemplate";
 import Checkout from "./pages/Checkout/Checkout";
 import { UserTemplate } from "./templates/UserTemplate/UserTemplate";
 import Loading from "./components/Loading/Loading";
+import Profile from "./pages/Profile/Profile";
 
 // const CheckoutTemplateLazy = lazy(() =>
 // 	import("./templates/CheckoutTemplate/CheckoutTemplate")
@@ -37,6 +38,7 @@ function App() {
 						Component={Checkout}
 					/>
 				</Suspense> */}
+				<HomeTemplate path='/profile' exact Component={Profile} />
 				<CheckoutTemplate path='/checkout/:id' exact Component={Checkout} />
 				<UserTemplate path='/login' exact Component={Login} />
 				<UserTemplate path='/register' exact Component={Register} />

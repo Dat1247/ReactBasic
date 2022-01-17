@@ -16,6 +16,9 @@ import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
 import { Tabs } from "antd";
 import moment from "moment";
 import { connection } from "../../index";
+import { history } from "../../App";
+import { TOKEN, USER_LOGIN } from "../../util/settings/config";
+import { NavLink } from "react-router-dom";
 
 const { TabPane } = Tabs;
 
@@ -50,8 +53,6 @@ function Checkout(props) {
 				let arrGhe = JSON.parse(item.danhSachGhe);
 				return [...result, ...arrGhe];
 			}, []);
-
-			console.log(arrGheKhachDat);
 
 			arrGheKhachDat = _.uniqBy(arrGheKhachDat, "maGhe");
 
@@ -277,10 +278,55 @@ function Checkout(props) {
 
 export default function Demo(props) {
 	const { tabActive } = useSelector((state) => state.QuanLyDatVeReducer);
+	const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		return () => {
+			dispatch({
+				type: CHUYEN_TAB_ACTIVE,
+				tabActive: "1",
+			});
+		};
+	}, []);
+
+	const operations = (
+		<Fragment>
+			{!_.isEmpty(userLogin) ? (
+				<div className='flex items-center'>
+					<button
+						onClick={() => {
+							history.push("/profile");
+						}}
+						className='flex items-center mr-3'>
+						<div
+							className='rounded-full bg-red-300 font-bold text-white flex justify-center items-center text-lg mr-3'
+							style={{ width: 50, height: 50 }}>
+							{userLogin.taiKhoan.substr(0, 1).toUpperCase()}
+						</div>
+						<b>Hello ! </b> {userLogin.taiKhoan}
+					</button>
+					<button
+						onClick={() => {
+							localStorage.removeItem(USER_LOGIN);
+							localStorage.removeItem(TOKEN);
+							history.push("/");
+							window.location.reload();
+						}}
+						className='text-red-800'>
+						Sign out
+					</button>
+				</div>
+			) : (
+				""
+			)}
+		</Fragment>
+	);
+
 	return (
 		<div className='p-5'>
 			<Tabs
+				tabBarExtraContent={operations}
 				defaultActiveKey='1'
 				activeKey={tabActive}
 				onChange={(key) => {
@@ -295,6 +341,7 @@ export default function Demo(props) {
 				<TabPane tab='02 KẾT QUẢ ĐẶT VÉ' key='2'>
 					<KetQuaDatVe {...props} />
 				</TabPane>
+				<TabPane tab={<NavLink to='/'>HOME</NavLink>} key='3'></TabPane>
 			</Tabs>
 		</div>
 	);
@@ -310,7 +357,7 @@ function KetQuaDatVe(props) {
 		const action = layThongTinNguoiDungAction();
 		dispatch(action);
 	}, []);
-	console.log(thongTinNguoiDung);
+
 	const renderTicketItem = () => {
 		return thongTinNguoiDung.thongTinDatVe?.map((ticket, index) => {
 			const seats = _.first(ticket.danhSachGhe);
