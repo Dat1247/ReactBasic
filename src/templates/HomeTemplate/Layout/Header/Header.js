@@ -1,8 +1,20 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { history } from "../../../../App";
+import { Select } from "antd";
+
+//Hook đa ngôn ngữ
+import { useTranslation } from "react-i18next";
+
+const { Option } = Select;
 
 export default function Header(props) {
+	const { t, i18n } = useTranslation();
+
+	const handleChange = (value) => {
+		i18n.changeLanguage(value);
+	};
+
 	return (
 		<header className='p-4 dark:bg-coolGray-800 dark:text-coolGray-100 bg-black bg-opacity-40 text-white fixed w-full z-10'>
 			<div className='container flex justify-between h-16 mx-auto'>
@@ -20,14 +32,14 @@ export default function Header(props) {
 						<NavLink
 							to='/home'
 							activeClassName=' border-white'
-							className='flex items-center px-4 -mb-1 border-b-2 border-transparent text-violet-400 border-violet-400 text-white'>
+							className='flex items-center px-4 -mb-1 border-b-2 border-transparent text-violet-400 border-violet-400 text-white text-xl'>
 							Home
 						</NavLink>
 					</li>
 					<li className='flex'>
 						<NavLink
 							to='/contact'
-							className='flex items-center px-4 -mb-1 border-b-2 border-transparent text-white'
+							className='flex items-center px-4 -mb-1 border-b-2 border-transparent text-white text-xl'
 							activeClassName=' border-white'>
 							Contact
 						</NavLink>
@@ -35,7 +47,7 @@ export default function Header(props) {
 					<li className='flex'>
 						<NavLink
 							to='/news'
-							className='flex items-center px-4 -mb-1 border-b-2 border-transparent text-white'
+							className='flex items-center px-4 -mb-1 border-b-2 border-transparent text-white  text-xl'
 							activeClassName=' border-white'>
 							News
 						</NavLink>
@@ -47,11 +59,23 @@ export default function Header(props) {
 						onClick={() => {
 							history.push("/login");
 						}}>
-						Sign in
+						{t("signin")}
 					</button>
-					<button className='self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-coolGray-900'>
-						Sign up
+					<button
+						onClick={() => {
+							history.push("/register");
+						}}
+						className='self-center px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-coolGray-900'>
+						{t("register")}
 					</button>
+					<Select
+						defaultValue='en'
+						style={{ width: 75 }}
+						onChange={handleChange}>
+						<Option value='en'>Eng</Option>
+						<Option value='chi'>Chi</Option>
+						<Option value='vi'>Vi</Option>
+					</Select>
 				</div>
 				<button className='p-4 lg:hidden'>
 					<svg

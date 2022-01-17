@@ -14,6 +14,8 @@ import "slick-carousel/slick/slick-theme.css";
 //Cấu hình realtime (Websocket với signalR)
 import * as signalR from "@aspnet/signalr";
 
+import "./i18n";
+
 // Đoạn code để kết nối đến server
 export const connection = new signalR.HubConnectionBuilder()
 	.withUrl(`${DOMAIN}/DatVeHub`)

@@ -39,7 +39,7 @@ function App() {
 				</Suspense> */}
 				<CheckoutTemplate path='/checkout/:id' exact Component={Checkout} />
 				<UserTemplate path='/login' exact Component={Login} />
-				<Route path='/register' exact Component={Register} />
+				<UserTemplate path='/register' exact Component={Register} />
 			</Switch>
 		</Router>
 	);
