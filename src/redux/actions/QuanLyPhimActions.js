@@ -6,11 +6,11 @@ import {
 } from "../types/QuanLyPhimTypes";
 import { displayLoadingAction, hideLoadingAction } from "./LoadingActions";
 
-export const layDanhSachPhimAction = () => {
+export const layDanhSachPhimAction = (tenPhim = "") => {
 	return async (dispatch) => {
 		try {
 			//Sử dụng tham số thamSo
-			const result = await quanLyPhimService.layDanhSachPhim();
+			const result = await quanLyPhimService.layDanhSachPhim(tenPhim);
 
 			dispatch({
 				type: SET_DANH_SACH_PHIM,
@@ -68,6 +68,23 @@ export const capNhatPhimUploadAction = (formData) => {
 
 			dispatch(layDanhSachPhimAction());
 			history.push("/admin/films");
+		} catch (errors) {
+			console.log(errors.response?.data);
+			console.log(errors);
+		}
+	};
+};
+
+export const xoaPhimAction = (maPhim) => {
+	return async (dispatch) => {
+		try {
+			const result = await quanLyPhimService.xoaPhim(maPhim);
+
+			console.log(result);
+
+			alert("Delete film successfully");
+
+			dispatch(layDanhSachPhimAction());
 		} catch (errors) {
 			console.log(errors.response?.data);
 			console.log(errors);

@@ -2,9 +2,16 @@ import React, { Fragment, useEffect } from "react";
 
 import { Button, Input, Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { layDanhSachPhimAction } from "../../../redux/actions/QuanLyPhimActions";
+import {
+	layDanhSachPhimAction,
+	xoaPhimAction,
+} from "../../../redux/actions/QuanLyPhimActions";
 import { NavLink } from "react-router-dom";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+	EditOutlined,
+	DeleteOutlined,
+	CalendarOutlined,
+} from "@ant-design/icons";
 import { history } from "../../../App";
 
 const { Search } = Input;
@@ -96,11 +103,33 @@ export default function Dashboard(props) {
 						<NavLink
 							key={1}
 							to={`/admin/films/edit/${film.maPhim}`}
-							className='text-blue-600 text-2xl p-3 mr-2 '>
+							className='text-blue-600 text-2xl p-3'>
 							<EditOutlined />
 						</NavLink>
-						<NavLink key={2} to='/' className='text-red-500 text-2xl p-3'>
+						<span
+							key={2}
+							onClick={() => {
+								//Goi action xoa
+								if (
+									window.confirm(
+										"Bạn có chắc muốn xóa phim" + film.tenPhim + "?"
+									)
+								) {
+									dispatch(xoaPhimAction(film.maPhim));
+								}
+							}}
+							style={{ cursor: "pointer" }}
+							className='text-red-500 text-2xl p-3'>
 							<DeleteOutlined />
+						</span>
+						<NavLink
+							// key={}
+							to={`/admin/films/showtime/${film.maPhim}`}
+							onClick={() => {
+								localStorage.setItem("filmParams", JSON.stringify(film));
+							}}
+							className='text-blue-600 text-2xl p-3'>
+							<CalendarOutlined />
 						</NavLink>
 					</Fragment>
 				);
@@ -111,9 +140,13 @@ export default function Dashboard(props) {
 
 	const data = arrFilmDefault;
 	function onChange(pagination, filters, sorter, extra) {
-		console.log("params", pagination, filters, sorter, extra);
+		// console.log("params", pagination, filters, sorter, extra);
 	}
-	const onSearch = (value) => console.log(value);
+	const onSearch = (value) => {
+		console.log(value);
+		//Goi api lay danh sach phim
+		dispatch(layDanhSachPhimAction(value));
+	};
 	return (
 		<div>
 			<h3 className='text-3xl'>Quản lý phim</h3>
@@ -132,7 +165,13 @@ export default function Dashboard(props) {
 				size='large'
 				onSearch={onSearch}
 			/>
-			<Table columns={columns} dataSource={data} onChange={onChange} />;
+			<Table
+				columns={columns}
+				dataSource={data}
+				onChange={onChange}
+				rowKey={"maPhim"}
+			/>
+			;
 		</div>
 	);
 }
