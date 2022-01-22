@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { layDanhSachNguoiDungAction } from "../../../redux/actions/QuanLyNguoiDungActions";
 
 export default function Dashboard(props) {
+	const { danhSachNguoiDung } = useSelector(
+		(state) => state.QuanLyNguoiDungReducer
+	);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const action = layDanhSachNguoiDungAction();
+		dispatch(action);
+	}, []);
+
+	console.log(danhSachNguoiDung);
 	const columns = [
 		{
 			title: "Name",

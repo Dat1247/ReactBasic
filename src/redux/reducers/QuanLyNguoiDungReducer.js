@@ -1,6 +1,7 @@
 import { TOKEN, USER_LOGIN } from "../../util/settings/config";
 import {
 	DANG_NHAP_ACTION,
+	GET_DANH_SACH_NGUOI_DUNG,
 	SET_THONG_TIN_NGUOI_DUNG,
 } from "../types/QuanLyNguoiDungType";
 
@@ -12,6 +13,7 @@ if (localStorage.getItem(USER_LOGIN)) {
 const initialState = {
 	userLogin: user,
 	thongTinNguoiDung: {},
+	danhSachNguoiDung: [],
 };
 
 export const QuanLyNguoiDungReducer = (state = initialState, action) => {
@@ -26,6 +28,10 @@ export const QuanLyNguoiDungReducer = (state = initialState, action) => {
 		}
 		case SET_THONG_TIN_NGUOI_DUNG: {
 			state.thongTinNguoiDung = action.thongTinNguoiDung;
+			return { ...state };
+		}
+		case GET_DANH_SACH_NGUOI_DUNG: {
+			state.danhSachNguoiDung = action.danhSachNguoiDung;
 			return { ...state };
 		}
 		default:

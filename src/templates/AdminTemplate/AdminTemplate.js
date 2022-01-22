@@ -3,7 +3,8 @@ import { Layout, Menu, Breadcrumb } from "antd";
 import {
 	UserOutlined,
 	PlaySquareOutlined,
-	FundViewOutlined,
+	UserAddOutlined,
+	AuditOutlined,
 	FolderAddOutlined,
 } from "@ant-design/icons";
 import { NavLink, Redirect, Route } from "react-router-dom";
@@ -87,17 +88,22 @@ export default function AdminTemplate(props) {
 									/>
 								</div>
 								<Menu theme='dark' defaultSelectedKeys={["1"]} mode='inline'>
-									<Menu.Item key='1' icon={<UserOutlined />}>
-										<NavLink to='/admin/users'>Users</NavLink>
-									</Menu.Item>
+									<SubMenu key='sub1' icon={<UserOutlined />} title='Users'>
+										<Menu.Item key='1' icon={<AuditOutlined />}>
+											<NavLink to='/admin/users'>List Users</NavLink>
+										</Menu.Item>
+										<Menu.Item key='2' icon={<UserAddOutlined />}>
+											<NavLink to='/admin/films/addnew'>Add User</NavLink>
+										</Menu.Item>
+									</SubMenu>
 									<SubMenu
-										key='sub1'
+										key='sub2'
 										icon={<PlaySquareOutlined />}
 										title='Films'>
-										<Menu.Item key='2' icon={<UserOutlined />}>
+										<Menu.Item key='3' icon={<PlaySquareOutlined />}>
 											<NavLink to='/admin/films'>Films</NavLink>
 										</Menu.Item>
-										<Menu.Item key='3' icon={<FolderAddOutlined />}>
+										<Menu.Item key='4' icon={<FolderAddOutlined />}>
 											<NavLink to='/admin/films/addnew'>Add New</NavLink>
 										</Menu.Item>
 									</SubMenu>
