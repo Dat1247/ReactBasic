@@ -58,10 +58,10 @@ export const dangKyAction = (thongTinDangKy) => {
 	};
 };
 
-export const layDanhSachNguoiDungAction = () => {
+export const layDanhSachNguoiDungAction = (tuKhoa = "") => {
 	return async (dispatch) => {
 		try {
-			const result = await quanLyNguoiDungService.layDanhSachNguoiDung();
+			const result = await quanLyNguoiDungService.layDanhSachNguoiDung(tuKhoa);
 
 			if (result.status === 200) {
 				dispatch({
@@ -72,6 +72,21 @@ export const layDanhSachNguoiDungAction = () => {
 		} catch (err) {
 			console.log(err.response?.data);
 			console.log(err);
+		}
+	};
+};
+
+export const xoaNguoiDungAction = (taiKhoan) => {
+	return async (dispatch) => {
+		try {
+			const result = await quanLyNguoiDungService.xoaNguoiDung(taiKhoan);
+
+			console.log(result);
+			alert("Xóa người dùng thành công!");
+
+			dispatch(layDanhSachNguoiDungAction());
+		} catch (err) {
+			console.log(err.response?.data);
 		}
 	};
 };

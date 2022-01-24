@@ -28,6 +28,11 @@ export class QuanLyNguoiDungService extends baseService {
 			`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${GROUPID}`
 		);
 	};
+	xoaNguoiDung = (taiKhoan) => {
+		return this.delete(
+			`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`
+		);
+	};
 }
 
 export const quanLyNguoiDungService = new QuanLyNguoiDungService();

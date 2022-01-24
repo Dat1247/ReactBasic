@@ -143,8 +143,8 @@ export default function Dashboard(props) {
 		// console.log("params", pagination, filters, sorter, extra);
 	}
 	const onSearch = (value) => {
-		console.log(value);
 		//Goi api lay danh sach phim
+
 		dispatch(layDanhSachPhimAction(value));
 	};
 	return (

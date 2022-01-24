@@ -1,10 +1,18 @@
-import React, { useEffect } from "react";
-import { Table } from "antd";
+import React, { useEffect, Fragment } from "react";
+import { Table, Tag, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { layDanhSachNguoiDungAction } from "../../../redux/actions/QuanLyNguoiDungActions";
+import {
+	layDanhSachNguoiDungAction,
+	xoaNguoiDungAction,
+} from "../../../redux/actions/QuanLyNguoiDungActions";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { NavLink } from "react-router-dom";
+import { history } from "../../../App";
+
+const { Search } = Input;
 
 export default function Dashboard(props) {
-	const { danhSachNguoiDung } = useSelector(
+	const { danhSachNguoiDungDefault } = useSelector(
 		(state) => state.QuanLyNguoiDungReducer
 	);
 	const dispatch = useDispatch();
@@ -14,96 +22,154 @@ export default function Dashboard(props) {
 		dispatch(action);
 	}, []);
 
-	console.log(danhSachNguoiDung);
 	const columns = [
 		{
-			title: "Name",
-			dataIndex: "name",
-			filters: [
-				{
-					text: "Joe",
-					value: "Joe",
-				},
-				{
-					text: "Jim",
-					value: "Jim",
-				},
-				{
-					text: "Submenu",
-					value: "Submenu",
-					children: [
-						{
-							text: "Green",
-							value: "Green",
-						},
-						{
-							text: "Black",
-							value: "Black",
-						},
-					],
-				},
-			],
+			title: "Họ tên",
+			dataIndex: "hoTen",
+			key: "hoTen",
 			// specify the condition of filtering result
 			// here is that finding the name started with `value`
-			onFilter: (value, record) => record.name.indexOf(value) === 0,
-			sorter: (a, b) => a.name.length - b.name.length,
-			sortDirections: ["descend"],
+			sorter: (a, b) => {
+				let hoTenA = a.hoTen.toLowerCase().trim();
+				let hoTenB = b.hoTen.toLowerCase().trim();
+				if (hoTenA > hoTenB) {
+					return 1;
+				}
+				return -1;
+			},
+			sortDirections: ["descend", "ascend"],
+			width: "15%",
 		},
 		{
-			title: "Age",
-			dataIndex: "age",
-			defaultSortOrder: "descend",
-			sorter: (a, b) => a.age - b.age,
+			title: "Tài khoản",
+			dataIndex: "taiKhoan",
+			key: "taiKhoan",
+
+			sorter: (a, b) => {
+				let taiKhoanA = a.taiKhoan.toLowerCase().trim();
+				let taiKhoanB = b.taiKhoan.toLowerCase().trim();
+				if (taiKhoanA > taiKhoanB) {
+					return 1;
+				}
+				return -1;
+			},
+			sortDirections: ["descend", "ascend"],
+			width: "15%",
 		},
 		{
-			title: "Address",
-			dataIndex: "address",
+			title: "Mật khẩu",
+			dataIndex: "matKhau",
+			key: "matKhau",
+			width: "10%",
+		},
+		{
+			title: "Email",
+			dataIndex: "email",
+			key: "email",
+			width: "20%",
+		},
+		{
+			title: "Số điện thoại",
+			dataIndex: "soDt",
+			key: "soDt",
+			width: "10%",
+		},
+		{
+			title: "Loại người dùng",
+			dataIndex: "maLoaiNguoiDung",
+			key: "maLoaiNguoiDung",
 			filters: [
 				{
-					text: "London",
-					value: "London",
+					text: "Quản Trị",
+					value: "QuanTri",
 				},
 				{
-					text: "New York",
-					value: "New York",
+					text: "Khách hàng",
+					value: "KhachHang",
 				},
 			],
-			onFilter: (value, record) => record.address.indexOf(value) === 0,
+			onFilter: (value, record) => {
+				return record.maLoaiNguoiDung.indexOf(value) === 0;
+			},
+			render: (maLoai) => {
+				let color = maLoai === "QuanTri" ? "blue" : "green";
+				return (
+					<Tag color={color} key={maLoai}>
+						{maLoai}
+					</Tag>
+				);
+			},
+
+			width: "15%",
+		},
+		{
+			title: "",
+			dataIndex: "action",
+			key: "action",
+			render: (text, nguoiDung, index) => {
+				return (
+					<Fragment key={index}>
+						<NavLink
+							key={1}
+							to={`/admin/users/edit/${nguoiDung.taiKhoan}`}
+							className='text-blue-600 text-2xl p-3'>
+							<EditOutlined />
+						</NavLink>
+						<span
+							key={2}
+							onClick={() => {
+								//Goi action xoa
+								if (
+									window.confirm(
+										"Bạn có chắc muốn xóa người dùng " + nguoiDung.hoTen + "?"
+									)
+								) {
+									dispatch(xoaNguoiDungAction(nguoiDung.taiKhoan));
+								}
+							}}
+							style={{ cursor: "pointer" }}
+							className='text-red-500 text-2xl p-3'>
+							<DeleteOutlined />
+						</span>
+					</Fragment>
+				);
+			},
+			width: "15%",
 		},
 	];
 
-	const data = [
-		{
-			key: "1",
-			name: "John Brown",
-			age: 32,
-			address: "New York No. 1 Lake Park",
-		},
-		{
-			key: "2",
-			name: "Jim Green",
-			age: 42,
-			address: "London No. 1 Lake Park",
-		},
-		{
-			key: "3",
-			name: "Joe Black",
-			age: 32,
-			address: "Sidney No. 1 Lake Park",
-		},
-		{
-			key: "4",
-			name: "Jim Red",
-			age: 32,
-			address: "London No. 2 Lake Park",
-		},
-	];
 	function onChange(pagination, filters, sorter, extra) {
 		console.log("params", pagination, filters, sorter, extra);
 	}
+	const onSearch = (value) => {
+		//Goi api lay danh sach nguoi dung
+		dispatch(layDanhSachNguoiDungAction(value));
+	};
+
 	return (
 		<div>
-			<Table columns={columns} dataSource={data} onChange={onChange} />;
+			<h3 className='text-3xl mb-0'>DANH SÁCH NGƯỜI DÙNG</h3>
+			<button
+				className='bg-blue-500 text-white font-bold  p-3 my-3 hover:bg-blue-300'
+				onClick={() => {
+					history.push("/admin/users/adduser");
+				}}>
+				Thêm người dùng
+			</button>
+			<Search
+				className='mb-5'
+				placeholder='Tìm kiếm người dùng'
+				allowClear
+				enterButton='Tìm kiếm'
+				size='large'
+				onSearch={onSearch}
+			/>
+			<Table
+				columns={columns}
+				dataSource={danhSachNguoiDungDefault}
+				onChange={onChange}
+				rowKey={"taiKhoan"}
+			/>
 		</div>
 	);
 }
