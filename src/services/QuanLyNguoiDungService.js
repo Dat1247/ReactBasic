@@ -6,6 +6,10 @@ export class QuanLyNguoiDungService extends baseService {
 		super();
 	}
 
+	layDanhSachMaLoaiNguoiDung = () => {
+		return this.get(`/api/QuanLyNguoiDung/LayDanhSachLoaiNguoiDung`);
+	};
+
 	layThongTinDangNhapNguoiDung = (thongTinDangNhap) => {
 		return this.post(`/api/QuanLyNguoiDung/DangNhap`, thongTinDangNhap);
 	};
@@ -28,11 +32,28 @@ export class QuanLyNguoiDungService extends baseService {
 			`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${GROUPID}`
 		);
 	};
+	timKiemNguoiDung = (tuKhoa) => {
+		return this.get(
+			`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${GROUPID}&tuKhoa=${tuKhoa}`
+		);
+	};
 	xoaNguoiDung = (taiKhoan) => {
 		return this.delete(
 			`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`
 		);
 	};
+	themNguoiDung = (nguoiDung) => {
+		return this.post(`/api/QuanLyNguoiDung/ThemNguoiDung`, nguoiDung);
+	};
+
+	chinhSuaNguoiDung = (nguoiDungUpdate) => {
+		return this.post(
+			`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`,
+			nguoiDungUpdate
+		);
+	};
+
+	//
 }
 
 export const quanLyNguoiDungService = new QuanLyNguoiDungService();

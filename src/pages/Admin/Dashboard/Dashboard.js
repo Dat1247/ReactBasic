@@ -153,6 +153,7 @@ export default function Dashboard(props) {
 				className='bg-blue-500 text-white font-bold  p-3 my-3 hover:bg-blue-300'
 				onClick={() => {
 					history.push("/admin/users/adduser");
+					// history.push(`/admin/users/edit/${null}`);
 				}}>
 				Thêm người dùng
 			</button>
