@@ -119,6 +119,7 @@ export const themNguoiDungAction = (nguoiDung) => {
 			alert("Thêm người dùng thành công!");
 			history.goBack();
 		} catch (err) {
+			alert(err.response?.data.content);
 			console.log(err.response?.data);
 		}
 	};
@@ -147,10 +148,8 @@ export const capNhatNguoiDungAction = (nguoiDungCapNhat) => {
 				nguoiDungCapNhat
 			);
 
-			alert("Cập nhật người dùng thành công!");
-			history.goBack();
-
-			console.log(result);
+			alert("Cập nhật thông tin thành công!");
+			// history.goBack();
 		} catch (err) {
 			console.log(err.response?.data);
 		}

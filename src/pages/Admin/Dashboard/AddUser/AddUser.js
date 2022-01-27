@@ -5,8 +5,10 @@ import {
 	layDanhSachMaLoaiNguoiDung,
 	themNguoiDungAction,
 } from "../../../../redux/actions/QuanLyNguoiDungActions";
+import { BackwardOutlined } from "@ant-design/icons";
 import * as Yup from "yup";
 import { GROUPID } from "../../../../util/settings/config";
+import { history } from "../../../../App";
 
 export default function AddUser(props) {
 	const { listLoaiNguoiDung } = useSelector(
@@ -230,6 +232,13 @@ export default function AddUser(props) {
 					</button>
 				</div>
 			</form>
+			<button
+				className='flex items-center px-2 py-3 text-gray-900 font-bold'
+				onClick={() => {
+					history.goBack();
+				}}>
+				<BackwardOutlined /> <span className='ml-1'>Quay lại</span>
+			</button>
 		</div>
 	);
 }

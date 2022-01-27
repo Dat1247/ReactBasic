@@ -139,7 +139,7 @@ export default function Dashboard(props) {
 	];
 
 	function onChange(pagination, filters, sorter, extra) {
-		console.log("params", pagination, filters, sorter, extra);
+		// console.log("params", pagination, filters, sorter, extra);
 	}
 	const onSearch = (value) => {
 		//Goi api lay danh sach nguoi dung
