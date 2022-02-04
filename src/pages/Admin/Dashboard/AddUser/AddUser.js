@@ -57,7 +57,7 @@ export default function AddUser(props) {
 
 	return (
 		<div>
-			<h3 className='text-3xl mb-0'>Chỉnh sửa người dùng</h3>
+			<h3 className='text-3xl mb-0'>Thêm người dùng</h3>
 
 			<form className='mt-8' onSubmit={handleSubmit}>
 				<div className='grid grid-cols-4 mb-6 gap-12'>

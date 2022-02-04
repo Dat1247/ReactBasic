@@ -5,6 +5,7 @@ import { history } from "../../App";
 import { dangKyAction } from "../../redux/actions/QuanLyNguoiDungActions";
 
 import * as Yup from "yup";
+import { GROUPID } from "../../util/settings/config";
 
 export default function Register(props) {
 	const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export default function Register(props) {
 			email: "",
 			soDT: "",
 			hoTen: "",
-			maNhom: "",
+			maNhom: GROUPID,
 		},
 		validationSchema: Yup.object().shape({
 			taiKhoan: Yup.string().required("Tài khoản không được để trống!"),
@@ -32,7 +33,6 @@ export default function Register(props) {
 				.matches(/^\d+$/, "Số điện thoại phải là số")
 				.required("Số điện thoại không được để trống!"),
 			hoTen: Yup.string().required("Họ tên không được để trống!"),
-			maNhom: Yup.string().required("Mã nhóm không được để trống!"),
 		}),
 		onSubmit: (values) => {
 			const action = dangKyAction(values);
@@ -166,21 +166,6 @@ xl:text-bold'>
 							/>
 							{errors.soDT && touched.soDT ? (
 								<div className='text-red-500 text-xs'>{errors.soDT}</div>
-							) : null}
-						</div>
-						<div className='mt-6'>
-							<div className='text-sm font-bold text-gray-700 tracking-wide'>
-								Mã nhóm
-							</div>
-
-							<input
-								className='w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500'
-								name='maNhom'
-								onChange={handleChange}
-								placeholder='Nhập mã nhóm từ GP00 - GP-16'
-							/>
-							{errors.maNhom && touched.maNhom ? (
-								<div className='text-red-500 text-xs'>{errors.maNhom}</div>
 							) : null}
 						</div>
 

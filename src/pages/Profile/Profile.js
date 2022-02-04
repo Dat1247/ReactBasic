@@ -11,6 +11,8 @@ import { Redirect } from "react-router-dom";
 import { USER_LOGIN } from "../../util/settings/config";
 import moment from "moment";
 import _ from "lodash";
+import { CustomCard } from "@tsamantanis/react-glassmorphism";
+import "@tsamantanis/react-glassmorphism/dist/index.css";
 
 const { TabPane } = Tabs;
 
@@ -49,7 +51,7 @@ export default function Profile(props) {
 					alt='banner'
 				/>
 			</div>
-			<div className='bg-gray-100'>
+			<div className=' bg-indigo-200'>
 				<div className='container py-12 px-40'>
 					<Tabs defaultActiveKey='1' type='card'>
 						<TabPane tab='THÔNG TIN CÁ NHÂN' key='1'>
@@ -112,7 +114,8 @@ function ThongTinCaNhan(props) {
 		<Form
 			onSubmitCapture={handleSubmit}
 			labelCol={{ span: 4 }}
-			wrapperCol={{ span: 14 }}>
+			wrapperCol={{ span: 14 }}
+			style={{ marginTop: "1rem" }}>
 			<Form.Item label='Họ tên'>
 				<Input name='hoTen' value={values.hoTen} onChange={handleChange} />
 				{errors.hoTen && touched.hoTen ? (
@@ -177,7 +180,11 @@ function KetQuaDatVe(props) {
 
 			return (
 				<div className='p-2 md:w-1/2 w-full' key={index}>
-					<div className='h-full flex items-center border-gray-200 border p-4 rounded-lg'>
+					<div
+						className='h-full flex items-center border-gray-200 border p-4 rounded-lg bg-gray-100'
+						style={{
+							boxShadow: "0 0 10px 5px rgba(0, 0, 0, 0.2)",
+						}}>
 						<img
 							alt='team'
 							className='w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4'
@@ -211,10 +218,10 @@ function KetQuaDatVe(props) {
 		});
 	};
 	return (
-		<section className='text-gray-600 body-font'>
+		<section className='text-gray-600 body-font' style={{ marginTop: "1rem" }}>
 			<div className='container px-5 mx-auto'>
 				<div className='flex flex-col text-center w-full '>
-					<h1 className='sm:text-3xl text-2xl font-medium title-font mb-4 text-purple-900 text-2xl'>
+					<h1 className='sm:text-3xl text-2xl font-bold title-font mb-4 text-purple-900 text-2xl'>
 						LỊCH SỬ KHÁCH HÀNG ĐẶT VÉ
 					</h1>
 				</div>

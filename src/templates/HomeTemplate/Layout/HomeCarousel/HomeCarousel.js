@@ -42,7 +42,10 @@ export default function HomeCarousel() {
 		});
 	};
 	return (
-		<Carousel effect='fade' style={{ position: "relative", zIndex: 1 }}>
+		<Carousel
+			autoplay={true}
+			effect='fade'
+			style={{ position: "relative", zIndex: 1 }}>
 			{renderBanner()}
 		</Carousel>
 	);

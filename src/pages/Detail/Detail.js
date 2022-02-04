@@ -19,7 +19,6 @@ export default function Detail(props) {
 		dispatch(layThongTinChiTietPhimAction(id));
 	}, []);
 
-	console.log("filmDetail", filmDetail);
 	return (
 		<div
 			style={{

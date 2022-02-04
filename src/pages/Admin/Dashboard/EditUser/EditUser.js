@@ -51,7 +51,6 @@ export default function EditUser(props) {
 			maLoaiNguoiDung: Yup.string().required("Vui lòng chọn loại người dùng!"),
 		}),
 		onSubmit: (values) => {
-			console.log(values);
 			const action = capNhatNguoiDungAction(values);
 			dispatch(action);
 		},

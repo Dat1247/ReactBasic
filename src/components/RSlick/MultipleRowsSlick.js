@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import {
@@ -35,7 +35,6 @@ const MultipleRowSlick = (props) => {
 		(state) => state.QuanLyPhimReducer
 	);
 	const dispatch = useDispatch();
-
 	let activeClassDC =
 		dangChieu === true
 			? `${styleSlick["active_Schedule"]}`
@@ -49,7 +48,6 @@ const MultipleRowSlick = (props) => {
 		return props.arrFilm.slice(0, 12).map((item, index) => {
 			return (
 				<div className={`${styleSlick["width-item"]} mb-4`} key={index}>
-					{/* <Film film={item} /> */}
 					<Film_Flip film={item} />
 				</div>
 			);

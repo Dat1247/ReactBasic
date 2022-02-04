@@ -84,7 +84,6 @@ export const xoaNguoiDungAction = (taiKhoan) => {
 		try {
 			const result = await quanLyNguoiDungService.xoaNguoiDung(taiKhoan);
 
-			console.log(result);
 			alert("Xóa người dùng thành công!");
 
 			dispatch(layDanhSachNguoiDungAction());
