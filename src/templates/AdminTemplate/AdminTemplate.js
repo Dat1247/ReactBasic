@@ -36,7 +36,6 @@ export default function AdminTemplate(props) {
 	}
 
 	const onCollapse = (collapsed) => {
-		// console.log(collapsed);
 		setCollapsed(collapsed);
 	};
 

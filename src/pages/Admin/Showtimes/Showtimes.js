@@ -18,7 +18,6 @@ export default function Showtimes(props) {
 				const result = await quanLyDatVeService.taoLichChieu(values);
 
 				alert("Tạo lịch chiếu thành công!");
-				console.log(result);
 			} catch (err) {
 				console.log(err);
 			}

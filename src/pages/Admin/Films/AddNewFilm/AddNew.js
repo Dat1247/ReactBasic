@@ -25,7 +25,6 @@ export default function AddNew(props) {
 			// maNhom: GROUPID,
 		},
 		onSubmit: (values) => {
-			console.log(values);
 			values.maNhom = GROUPID;
 			//Tạo đối tượng formData => Đưa giá trị values từ formik vào formData
 			let formData = new FormData();
@@ -76,7 +75,6 @@ export default function AddNew(props) {
 
 			//Trả file về định dạng base64
 			reader.onload = (e) => {
-				// console.log(e.target.result);
 				setImgSrc(e.target.result);
 			};
 
@@ -125,7 +123,7 @@ export default function AddNew(props) {
 					// name='dangChieu'
 					onChange={handleChangeSwitch("dangChieu")}
 					// onChange={(value) => {
-					//     console.log("value", value);
+
 					//     // formik.setFieldValue('dangChieu', value)
 
 					// }}

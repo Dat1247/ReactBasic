@@ -20,7 +20,7 @@ export const dangNhapAction = (thongTinDangNhap) => {
 					type: DANG_NHAP_ACTION,
 					thongTinDangNhap: result.data.content,
 				});
-				history.goBack();
+				history.push("/");
 			}
 		} catch (err) {
 			console.log(err);
@@ -89,6 +89,7 @@ export const xoaNguoiDungAction = (taiKhoan) => {
 			dispatch(layDanhSachNguoiDungAction());
 		} catch (err) {
 			console.log(err.response?.data);
+			alert(err.response?.data.content);
 		}
 	};
 };

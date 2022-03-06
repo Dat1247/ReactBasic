@@ -21,7 +21,6 @@ export default function Edit(props) {
 		dispatch(layThongTinPhimAction(id));
 	}, []);
 
-	console.log(thongTinPhim);
 	const formik = useFormik({
 		enableReinitialize: true,
 		initialValues: {
@@ -38,7 +37,6 @@ export default function Edit(props) {
 			maNhom: GROUPID,
 		},
 		onSubmit: (values) => {
-			console.log(values);
 			values.maNhom = GROUPID;
 			//Tạo đối tượng formData => Đưa giá trị values từ formik vào formData
 			let formData = new FormData();
@@ -92,7 +90,6 @@ export default function Edit(props) {
 
 			//Trả file về định dạng base64
 			reader.onload = (e) => {
-				// console.log(e.target.result);
 				setImg(e.target.result);
 			};
 		}
@@ -154,11 +151,6 @@ export default function Edit(props) {
 					name='dangChieu'
 					onChange={handleChangeSwitch("dangChieu")}
 					checked={formik.values.dangChieu}
-					// onChange={(value) => {
-					//     console.log("value", value);
-					//     // formik.setFieldValue('dangChieu', value)
-
-					// }}
 				/>
 			</Form.Item>
 			<Form.Item label='Sắp chiếu' valuePropName='checked'>

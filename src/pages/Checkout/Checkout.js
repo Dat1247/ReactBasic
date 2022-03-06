@@ -42,7 +42,6 @@ function Checkout(props) {
 
 		//Load danh sách ghế đang đặt từ server về
 		connection.on("loadDanhSachGheDaDat", (dsGheKhachDat) => {
-			// console.log("dsGheDangDatReturn", dsGheKhachDat);
 			//Bước 1: Loại mình ra khỏi danh sách
 			dsGheKhachDat = dsGheKhachDat.filter(
 				(item) => item.taiKhoan !== userLogin.taiKhoan

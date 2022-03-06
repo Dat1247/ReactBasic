@@ -72,10 +72,6 @@ export const datGheAction = (ghe, maLichChieu) => {
 
 		danhSachGheDangDat = JSON.stringify(danhSachGheDangDat);
 
-		// console.log("danhSachGheDangDat", danhSachGheDangDat);
-		// console.log("taiKhoan", taiKhoan);
-		// console.log("maLichChieu", maLichChieu);
-
 		//Call api signalR
 		connection.invoke("datGhe", taiKhoan, danhSachGheDangDat, maLichChieu);
 	};

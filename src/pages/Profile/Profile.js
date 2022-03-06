@@ -11,7 +11,6 @@ import { Redirect } from "react-router-dom";
 import { USER_LOGIN } from "../../util/settings/config";
 import moment from "moment";
 import _ from "lodash";
-import { CustomCard } from "@tsamantanis/react-glassmorphism";
 import "@tsamantanis/react-glassmorphism/dist/index.css";
 
 const { TabPane } = Tabs;
@@ -36,7 +35,7 @@ export default function Profile(props) {
 		<div>
 			<div
 				style={{
-					backgroundImage: "url('https://picsum.photos/750')",
+					backgroundImage: "url('https://picsum.photos/2000')",
 					height: "350px",
 					color: "#fff",
 					lineHeight: "160px",
@@ -46,7 +45,7 @@ export default function Profile(props) {
 					backgroundRepeat: "no-repeat",
 				}}>
 				<img
-					src='https://picsum.photos/750'
+					src='https://picsum.photos/2000'
 					className='w-full opacity-0 h-full'
 					alt='banner'
 				/>
@@ -222,7 +221,7 @@ function KetQuaDatVe(props) {
 			<div className='container px-5 mx-auto'>
 				<div className='flex flex-col text-center w-full '>
 					<h1 className='sm:text-3xl text-2xl font-bold title-font mb-4 text-purple-900 text-2xl'>
-						LỊCH SỬ KHÁCH HÀNG ĐẶT VÉ
+						LỊCH SỬ ĐẶT VÉ
 					</h1>
 				</div>
 				<div
